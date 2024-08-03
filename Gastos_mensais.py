@@ -9,13 +9,13 @@ print('GASTOS MENSAIS DO RESTAURANTE')
 gastos_variaveis = {}
 gastos_fixos = {}
 gastos_bebidas = {}
-gastos_alimentos = {}
-tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Alimento (A): ')
+gastos_mantimentos = {}
+tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Mantimento (M): ')
 while True:
-    while tipo_gasto.upper() != 'F' and tipo_gasto.upper() != 'V':
+    while tipo_gasto.upper() != 'F' and tipo_gasto.upper() != 'V' and tipo_gasto.upper() != 'B' and tipo_gasto.upper() != 'A':
         limpar()
         print('Digite somente (F), (V), (B) ou (A)')
-        tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Alimento (A): ')
+        tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Mantimento (M): ')
 
     if tipo_gasto.upper() == 'F':
         gasto_fixo = input('Gasto fixo: ')
@@ -32,10 +32,10 @@ while True:
         valor_gasto_bebida = input('R$ ')
         gastos_bebidas.update({gasto_bebida: float(valor_gasto_bebida)})
         limpar()
-    elif tipo_gasto.upper() == 'A':
-        gasto_alimento = input('Gasto com alimento: ')
-        valor_gasto_alimento = input('R$ ')
-        gastos_alimentos.update({gasto_alimento: float(valor_gasto_alimento)})
+    elif tipo_gasto.upper() == 'M':
+        gasto_mantimento = input('Gasto com mantimento: ')
+        valor_gasto_mantimento = input('R$ ')
+        gastos_mantimentos.update({gasto_mantimento: float(valor_gasto_mantimento)})
         limpar()
     
     incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N) ')
@@ -45,16 +45,16 @@ while True:
         incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N)  ')
     if incluir.upper() == 'S':
         limpar()
-        tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Alimento (A): ')
+        tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Mantimento (M): ')
     else:
         break
 
 total_gasto_fixo = sum(gastos_fixos.values())
 total_gasto_variavel = sum(gastos_variaveis.values())
 total_gasto_bebida = sum(gastos_bebidas.values())
-total_gasto_alimento = sum(gastos_alimentos.values())
+total_gasto_mantimento = sum(gastos_mantimentos.values())
 
 print(f'O total dos gastos fixos foram: {total_gasto_fixo:.2f} reais.')
 print(f'O total dos gastos variávies foram: {total_gasto_variavel:.2f} reais.')
 print(f'O total dos gastos com bebidas foram: {total_gasto_bebida:.2f} reais.')
-print(f'O total dos gastos com alimentos foram: {total_gasto_alimento:.2f} reais.')
+print(f'O total dos gastos com alimentos foram: {total_gasto_mantimento:.2f} reais.')

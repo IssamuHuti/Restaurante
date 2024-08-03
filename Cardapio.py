@@ -5,25 +5,39 @@ def limpar():
 
 def ingrediente_usado():
     insira_ingrediente = input('Insira ingrediente para o prato: ')
+    if insira_ingrediente.lower() == 'pare':
+        return None, None
     medida_ingrediente = input('Medida do ingrediente: ')
-    ingredientes.update({insira_ingrediente: int(medida_ingrediente)})
-    limpar()
+    return insira_ingrediente, medida_ingrediente
 
 def obter_ingrediente():
-    i, _ = ingrediente_usado()
-    return i
+    ingrediente, medida = ingrediente_usado()
+    return ingrediente, medida
 
 limpar()
 
 print('Cardápio do restaurante')
 pratos = []
 while True:
-    novo_prato = input('Informe o nome do novo prato: ')
+    novo_prato = input('Informe o nome do novo prato (ou "pare" para finalizar): ')
+    if novo_prato.lower() == 'pare':
+        break
+
     ingredientes = {}
-    ingrediente_usado()
-    while obter_ingrediente != 'pare':
-        ingrediente_usado()
-    print(novo_prato)
-    for ingrediente in ingredientes:
-        print(ingrediente.items())
+
+    ingrediente, medida = obter_ingrediente()
+    if ingrediente is None:
+        break
+    ingredientes.update({ingrediente: medida})
+    while True:
+        limpar()
+        ingrediente, medida = obter_ingrediente()
+        if ingrediente is None:
+            break
+        ingredientes.update({ingrediente: medida})
     
+    pratos.append((novo_prato, ingredientes))
+
+    print(f'Prato: {novo_prato}')
+    for ingrediente, medida in ingredientes.items():
+        print(f'{ingrediente}: {medida}')
