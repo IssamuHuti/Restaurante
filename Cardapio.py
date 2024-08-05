@@ -1,4 +1,5 @@
 import os
+import json
 
 def limpar():
     os.system('cls')
@@ -41,3 +42,14 @@ while True:
     print(f'Prato: {novo_prato}')
     for ingrediente, medida in ingredientes.items():
         print(f'{ingrediente}: {medida}')
+    
+    break
+
+with open('cardapio.jason', 'w', encoding='utf8') as arquivo:
+    json.dump(
+        pratos,
+        arquivo,
+        ensure_ascii=False,
+        indent=2,
+    )
+
