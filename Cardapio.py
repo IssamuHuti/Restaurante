@@ -45,7 +45,7 @@ while True:
     
     break
 
-with open('cardapio.jason', 'w', encoding='utf8') as arquivo:
+with open('cardapio.json', 'w', encoding='utf8') as arquivo:
     json.dump(
         pratos,
         arquivo,

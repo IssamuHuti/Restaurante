@@ -1,21 +1,35 @@
 import os
+import json
+from datetime import datetime
 
 def limpar():
     os.system('cls')
 
+def data_lista():
+    data_compra = datetime.now()
+    data_formatada = data_compra.strftime('%m/%Y')
+    print('Gasto do mês:', data_formatada)
+
 limpar()
 print('GASTOS MENSAIS DO RESTAURANTE')
+data_lista()
 
+print()
+
+total_gastos = {}
 gastos_variaveis = {}
 gastos_fixos = {}
 gastos_bebidas = {}
 gastos_mantimentos = {}
 tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Mantimento (M): ')
+
 while True:
-    while tipo_gasto.upper() != 'F' and tipo_gasto.upper() != 'V' and tipo_gasto.upper() != 'B' and tipo_gasto.upper() != 'A':
+    while tipo_gasto.upper() != 'F' and tipo_gasto.upper() != 'V' and tipo_gasto.upper() != 'B' and tipo_gasto.upper() != 'M':
         limpar()
         print('Digite somente (F), (V), (B) ou (A)')
         tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V), Bebida (B) ou Mantimento (M): ')
+
+    limpar()
 
     if tipo_gasto.upper() == 'F':
         gasto_fixo = input('Gasto fixo: ')
@@ -53,7 +67,20 @@ total_gasto_fixo = sum(gastos_fixos.values())
 total_gasto_variavel = sum(gastos_variaveis.values())
 total_gasto_bebida = sum(gastos_bebidas.values())
 total_gasto_mantimento = sum(gastos_mantimentos.values())
+total_gastos['Gastos_fixos'] = total_gasto_fixo
+total_gastos['Gastos_variaveis'] = total_gasto_variavel
+total_gastos['Gastos_bebidas'] = total_gasto_bebida
+total_gastos['Gastos_mantimentos'] = total_gasto_mantimento
 
+with open('gasto_mensal.json', 'w', encoding='utf8') as arquivo:
+    json.dump(
+        total_gastos,
+        arquivo,
+        ensure_ascii=False,
+        indent=2,
+    )
+
+data_lista()
 print(f'O total dos gastos fixos foram: {total_gasto_fixo:.2f} reais.')
 print(f'O total dos gastos variávies foram: {total_gasto_variavel:.2f} reais.')
 print(f'O total dos gastos com bebidas foram: {total_gasto_bebida:.2f} reais.')
