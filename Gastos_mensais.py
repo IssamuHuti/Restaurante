@@ -17,6 +17,7 @@ data_lista()
 print()
 
 total_gastos = {}
+gastos_categoria = {}
 gastos_variaveis = {}
 gastos_fixos = {}
 gastos_bebidas = {}
@@ -35,21 +36,25 @@ while True:
         gasto_fixo = input('Gasto fixo: ')
         valor_gasto_fixo = input('R$ ')
         gastos_fixos.update({gasto_fixo: float(valor_gasto_fixo)})
+        gastos_categoria.update({gasto_fixo: float(valor_gasto_fixo)})
         limpar()
     elif tipo_gasto.upper() == 'V':
         gasto_variavel = input('Gasto variavel: ')
         valor_gasto_variavel = input('R$ ')
         gastos_variaveis.update({gasto_variavel: float(valor_gasto_variavel)})
+        gastos_categoria.update({gasto_variavel: float(valor_gasto_variavel)})
         limpar()
     elif tipo_gasto.upper() == 'B':
         gasto_bebida = input('Gasto com bebida: ')
         valor_gasto_bebida = input('R$ ')
         gastos_bebidas.update({gasto_bebida: float(valor_gasto_bebida)})
+        gastos_categoria.update({gasto_bebida: float(valor_gasto_bebida)})
         limpar()
     elif tipo_gasto.upper() == 'M':
         gasto_mantimento = input('Gasto com mantimento: ')
         valor_gasto_mantimento = input('R$ ')
         gastos_mantimentos.update({gasto_mantimento: float(valor_gasto_mantimento)})
+        gastos_categoria.update({gasto_mantimento: float(valor_gasto_mantimento)})
         limpar()
     
     incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N) ')
@@ -63,21 +68,23 @@ while True:
     else:
         break
 
-total_gasto_fixo = sum(gastos_fixos.values())
-total_gasto_variavel = sum(gastos_variaveis.values())
-total_gasto_bebida = sum(gastos_bebidas.values())
-total_gasto_mantimento = sum(gastos_mantimentos.values())
+total_gasto_fixo = round(sum(gastos_fixos.values()), 2)
+total_gasto_variavel = round(sum(gastos_variaveis.values()), 2)
+total_gasto_bebida = round(sum(gastos_bebidas.values()), 2)
+total_gasto_mantimento = round(sum(gastos_mantimentos.values()), 2)
 total_gastos['Gastos_fixos'] = total_gasto_fixo
 total_gastos['Gastos_variaveis'] = total_gasto_variavel
 total_gastos['Gastos_bebidas'] = total_gasto_bebida
 total_gastos['Gastos_mantimentos'] = total_gasto_mantimento
 
+dados_gasto_mes = {'Total de gasto':total_gastos, 'Gastos por categoria':gastos_categoria}
+
 with open('gasto_mensal.json', 'w', encoding='utf8') as arquivo:
     json.dump(
-        total_gastos,
+        dados_gasto_mes,
         arquivo,
         ensure_ascii=False,
-        indent=2,
+        indent=3,
     )
 
 data_lista()

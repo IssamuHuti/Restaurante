@@ -1,6 +1,12 @@
 {
-  "Gastos_fixos": 800.0,
-  "Gastos_variaveis": 400.0,
-  "Gastos_bebidas": 250.0,
-  "Gastos_mantimentos": 500.0
+   "Total de gasto": {
+      "Gastos_fixos": 1000.0,
+      "Gastos_variaveis": 0,
+      "Gastos_bebidas": 400.0,
+      "Gastos_mantimentos": 0
+   },
+   "Gastos por categoria": {
+      "alguel": 1000.0,
+      "coca": 400.0
+   }
 }
