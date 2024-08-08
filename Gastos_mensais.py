@@ -36,25 +36,21 @@ while True:
         gasto_fixo = input('Gasto fixo: ')
         valor_gasto_fixo = input('R$ ')
         gastos_fixos.update({gasto_fixo: float(valor_gasto_fixo)})
-        gastos_categoria.update({gasto_fixo: float(valor_gasto_fixo)})
         limpar()
     elif tipo_gasto.upper() == 'V':
         gasto_variavel = input('Gasto variavel: ')
         valor_gasto_variavel = input('R$ ')
         gastos_variaveis.update({gasto_variavel: float(valor_gasto_variavel)})
-        gastos_categoria.update({gasto_variavel: float(valor_gasto_variavel)})
         limpar()
     elif tipo_gasto.upper() == 'B':
         gasto_bebida = input('Gasto com bebida: ')
         valor_gasto_bebida = input('R$ ')
         gastos_bebidas.update({gasto_bebida: float(valor_gasto_bebida)})
-        gastos_categoria.update({gasto_bebida: float(valor_gasto_bebida)})
         limpar()
     elif tipo_gasto.upper() == 'M':
         gasto_mantimento = input('Gasto com mantimento: ')
         valor_gasto_mantimento = input('R$ ')
         gastos_mantimentos.update({gasto_mantimento: float(valor_gasto_mantimento)})
-        gastos_categoria.update({gasto_mantimento: float(valor_gasto_mantimento)})
         limpar()
     
     incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N) ')
@@ -76,6 +72,11 @@ total_gastos['Gastos_fixos'] = total_gasto_fixo
 total_gastos['Gastos_variaveis'] = total_gasto_variavel
 total_gastos['Gastos_bebidas'] = total_gasto_bebida
 total_gastos['Gastos_mantimentos'] = total_gasto_mantimento
+
+gastos_categoria.update({'Gastos fixos': gastos_fixos})
+gastos_categoria.update({'Gastos variáveis': gastos_variaveis})
+gastos_categoria.update({'Gastos bebidas': gastos_bebidas})
+gastos_mantimentos.update({'Gastos mantimentos': gastos_mantimentos})
 
 dados_gasto_mes = {'Total de gasto':total_gastos, 'Gastos por categoria':gastos_categoria}
 
