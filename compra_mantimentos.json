@@ -1,10 +1,8 @@
 {
-  "Data": "08/08/2024",
+  "Data": "10/08/2024",
+  "Total de gasto": 30.0,
   "Produtos": {
-    "arroz": "200",
-    "ovo": "30",
-    "leite": "25",
-    "farinha": "20",
-    "açucar": "10"
+    "arroz": 20.0,
+    "ovo": 10.0
   }
 }

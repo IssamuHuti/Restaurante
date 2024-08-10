@@ -16,16 +16,18 @@ produtos = {}
 
 produto = input('Produto: ')
 preco = input('R$ ')
-produtos.update({produto: preco})
+produtos.update({produto: float(preco)})
 while True:
     limpar()
     produto = input('Produto: ')
     if produto == 'pare':
         break
     preco = input('R$ ')
-    produtos.update({produto: preco})
+    produtos.update({produto: float(preco)})
 
-arquivo_matimentos = {'Data': data_formatada, 'Produtos': produtos}
+total_gasto_produtos = round(sum(produtos.values()), 2)
+
+arquivo_matimentos = {'Data': data_formatada, 'Total de gasto': total_gasto_produtos, 'Produtos': produtos}
 limpar()
 with open('compra_mantimentos.json', 'w', encoding='utf8') as arquivo:
     json.dump(
@@ -35,4 +37,8 @@ with open('compra_mantimentos.json', 'w', encoding='utf8') as arquivo:
         indent=2,
     )
 
-print(produtos)
+for detalhe, mais_detalhe in arquivo_matimentos.items():
+    if type(mais_detalhe) == dict:
+        for i, j in mais_detalhe.items():
+            print('- ', i, j)
+    print(detalhe, mais_detalhe)
