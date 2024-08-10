@@ -88,6 +88,10 @@ with open('gasto_mensal.json', 'w', encoding='utf8') as arquivo:
         indent=3,
     )
 
+with open('compra_mantimentos.json', 'r', encoding='utf8') as arquivo:
+    arquivo_matimentos = json.load(arquivo)
+    print(arquivo_matimentos)
+
 data_lista()
 print(f'O total dos gastos fixos foram: {total_gasto_fixo:.2f} reais.')
 print(f'O total dos gastos variávies foram: {total_gasto_variavel:.2f} reais.')
