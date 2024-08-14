@@ -9,8 +9,21 @@
       "sal": [
         "1",
         "pitada"
+      ]
+    }
+  ],
+  [
+    "pão",
+    {
+      "trigo": [
+        "500",
+        "gramas"
       ],
-      "oleo": [
+      "ovo": [
+        "12",
+        "unidades"
+      ],
+      "sal": [
         "4",
         "colheres de sopa"
       ]

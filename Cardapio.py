@@ -41,11 +41,20 @@ while True:
     
     pratos.append((novo_prato, ingredientes))
 
-    print(f'Prato: {novo_prato}')
-    for ingrediente, medidas in ingredientes.items():
+    limpar()
+    mais_um_prato = input('Deseja cadastrar mais um prato? Sim (S) Não (N)')
+    while mais_um_prato.upper() != 'S' and mais_um_prato.upper() != 'N':
+        print('Informe Sim (S) ou Não (N)')
+        mais_um_prato = input('Deseja cadastrar mais um prato? Sim (S) Não (N): ')
+    if mais_um_prato.upper() == 'S':
+        limpar()
+        novo_prato = input('Informe o nome do novo prato (ou "pare" para finalizar): ')
+    else:
+        break
+
+print(f'Prato: {novo_prato}')
+for ingrediente, medidas in ingredientes.items():
         print(f'{ingrediente}: {medidas[0]} {medidas[1]}')
-    
-    break
 
 with open('cardapio.json', 'w', encoding='utf8') as arquivo:
     json.dump(
