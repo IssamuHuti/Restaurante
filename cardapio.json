@@ -1,32 +1,30 @@
-[
-  [
-    "ovo frito",
-    {
-      "ovo": [
-        "1",
-        "unidade"
-      ],
-      "sal": [
-        "1",
-        "pitada"
-      ]
-    }
-  ],
-  [
-    "pão",
-    {
-      "trigo": [
-        "500",
-        "gramas"
-      ],
-      "ovo": [
-        "12",
-        "unidades"
-      ],
-      "sal": [
-        "4",
-        "colheres de sopa"
-      ]
-    }
-  ]
-]
+{
+  "pão": {
+    "trigo": [
+      "400",
+      "g"
+    ],
+    "ovo": [
+      "6",
+      "unidade"
+    ],
+    "fermento": [
+      "2",
+      "colher sopa"
+    ],
+    "sal": [
+      "4",
+      "pitadas"
+    ]
+  },
+  "ovo frito": {
+    "ovo": [
+      "1",
+      "ud"
+    ],
+    "sal": [
+      "1",
+      "pitada"
+    ]
+  }
+}

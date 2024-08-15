@@ -20,7 +20,7 @@ def obter_ingrediente():
 limpar()
 
 print('Cardápio do restaurante')
-pratos = []
+pratos = {}
 while True:
     novo_prato = input('Informe o nome do novo prato (ou "pare" para finalizar): ')
     if novo_prato.lower() == 'pare':
@@ -39,7 +39,7 @@ while True:
             break
         ingredientes.update({ingrediente: medidas})
     
-    pratos.append((novo_prato, ingredientes))
+    pratos.update({novo_prato: ingredientes})
 
     limpar()
     mais_um_prato = input('Deseja cadastrar mais um prato? Sim (S) Não (N)')
@@ -48,7 +48,7 @@ while True:
         mais_um_prato = input('Deseja cadastrar mais um prato? Sim (S) Não (N): ')
     if mais_um_prato.upper() == 'S':
         limpar()
-        novo_prato = input('Informe o nome do novo prato (ou "pare" para finalizar): ')
+        continue
     else:
         break
 
