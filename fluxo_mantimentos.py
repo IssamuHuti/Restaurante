@@ -7,3 +7,4 @@ def limpar():
 
 entrada_mantimentos = {}
 saidas_mantimentos = {}
+

@@ -7,7 +7,7 @@ def limpar():
 
 limpar()
 data_compra = datetime.now()
-data_formatada = data_compra.strftime('%d/%m/%Y')
+data_formatada = data_compra.strftime('%d_%m_%Y')
 print('Data da compra: ', data_formatada)
 
 print('Informe os gastos com mantimentos do dia')
@@ -29,7 +29,7 @@ total_gasto_produtos = round(sum(produtos.values()), 2)
 
 arquivo_matimentos = {'Data': data_formatada, 'Total de gasto': total_gasto_produtos, 'Produtos': produtos}
 limpar()
-with open('compra_mantimentos.json', 'w', encoding='utf8') as arquivo:
+with open('compra_mantimentos_' + str(data_formatada) + '.json', 'w', encoding='utf8') as arquivo:
     json.dump(
         arquivo_matimentos,
         arquivo,
