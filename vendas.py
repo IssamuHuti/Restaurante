@@ -53,10 +53,16 @@ vendas_dia = {'data': data_formatada, 'Vendas_pratos': vendas_pratos}
     #     print('Informe o prato que está no cardápio')
     #     venda_prato = input('Prato: ')
 
-with open('venda_' + str(data_formatada) + '.json', 'w', encoding='utf8') as arquivo:
+arquivo_venda_dia = 'venda_{}.json'.format(str(data_formatada))
+pasta_salva = os.path.join(os.path.dirname(os.path.abspath(__file__)), arquivo_venda_dia)
+os.makedirs(os.path.dirname(os.path.abspath(__file__)), exist_ok=True)
+
+# o arquivo está salvando com o mesmo nome do arquivo json
+
+with open(pasta_salva, 'w', encoding='utf8') as arquivo_json:
     json.dump(
         vendas_dia,
-        arquivo,
+        arquivo_json,
         ensure_ascii=False,
         indent=2,
     )
