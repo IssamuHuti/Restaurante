@@ -28,8 +28,14 @@ while True:
 total_gasto_produtos = round(sum(produtos.values()), 2)
 
 arquivo_matimentos = {'Data': data_formatada, 'Total de gasto': total_gasto_produtos, 'Produtos': produtos}
+
+pasta_salva = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos')
+os.makedirs(os.path.dirname(os.path.abspath(__file__)), exist_ok=True)
+
+compra_mant_dia = os.path.join(pasta_salva, 'compra_mant_{}.json'.format(str(data_formatada)))
+
 limpar()
-with open('compra_mantimentos_' + str(data_formatada) + '.json', 'w', encoding='utf8') as arquivo:
+with open(compra_mant_dia, 'w', encoding='utf8') as arquivo:
     json.dump(
         arquivo_matimentos,
         arquivo,

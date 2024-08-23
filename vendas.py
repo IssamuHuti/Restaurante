@@ -23,8 +23,11 @@ print('VENDAS DO DIA')
 vendas_pratos = {}
 vendas_bebidas = {}
 
-with open('cardapio.json', 'r', encoding='utf8') as arquivo:
+caminho_cardapio = os.path.join(__file__, 'cardapio', 'cardapio.json')
+with open(caminho_cardapio, 'r', encoding='utf8') as arquivo:
     cardapio_vendas = json.load(arquivo)
+
+# problema para criar caminho para acessar arquivo json
 
 while True:
     while True:
@@ -57,8 +60,6 @@ pasta_salva = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'vendas_d
 os.makedirs(os.path.dirname(os.path.abspath(__file__)), exist_ok=True)
 
 arquivo_venda_dia = os.path.join(pasta_salva, 'venda_{}.json'.format(str(data_formatada)))
-
-# o arquivo está salvando com o mesmo nome do arquivo json
 
 with open(arquivo_venda_dia, 'w', encoding='utf8') as arquivo_json:
     json.dump(
