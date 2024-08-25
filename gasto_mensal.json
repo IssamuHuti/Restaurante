@@ -1,0 +1,12 @@
+{
+   "Total de gasto": {
+      "Gastos_fixos": 500.0,
+      "Gastos_variaveis": 0
+   },
+   "Gastos por categoria": {
+      "Gastos fixos": {
+         "luz": 500.0
+      },
+      "Gastos variáveis": {}
+   }
+}

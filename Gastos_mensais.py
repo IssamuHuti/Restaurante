@@ -1,6 +1,7 @@
 import os
 import json
 from datetime import datetime
+from collections import defaultdict
 
 def limpar():
     os.system('cls')
@@ -70,14 +71,33 @@ with open('gasto_mensal.json', 'w', encoding='utf8') as arquivo:
         indent=3,
     )
 
-# precisa puxar todas as compras das pastas compra_mantimentos e compras_bebidas
-with open('compra_mantimentos.json', 'r', encoding='utf8') as arquivo:
-    arquivo_matimentos = json.load(arquivo)
-total_mantimentos = arquivo_matimentos['Total de gasto']
+pasta_compra_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos')
+compras_mantimentos_combinados = defaultdict(float)
 
-with open('compra_bebidas.json', 'r', encoding='utf8') as arquivo:
-    arquivo_bebidas = json.load(arquivo)
-total_bebidas = arquivo_bebidas['Total de gasto']
+for arquivo_compra_mantimento in os.listdir(pasta_compra_mantimentos):
+    if arquivo_compra_mantimento.endswith('.json'):
+        caminho_arquivo = os.path.join(pasta_compra_mantimentos, arquivo_compra_mantimento)
+        with open(caminho_arquivo, 'r', encoding='utf8') as arquivo:
+            dados = json.load(arquivo)
+            compras = dados.get("Produtos", {})
+            for item, valor in compras.items():
+                compras_mantimentos_combinados[item] += valor
+
+total_mantimentos = round(sum(compras_mantimentos_combinados.values()), 2)
+
+pasta_compra_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas')
+compras_bebidas_combinados = defaultdict(float)
+
+for arquivo_compra_bebida in os.listdir(pasta_compra_bebidas):
+    if arquivo_compra_bebida.endswith('.json'):
+        caminho_arquivo = os.path.join(pasta_compra_bebidas, arquivo_compra_bebida)
+        with open(caminho_arquivo, 'r', encoding='utf8') as arquivo:
+            dados = json.load(arquivo)
+            compras = dados.get("Produtos", {})
+            for item, valor in compras.items():
+                compras_bebidas_combinados[item] += valor
+
+total_bebidas = round(sum(compras_bebidas_combinados.values()), 2)
 
 data_lista()
 print(f'O total dos gastos fixos foram: {total_gasto_fixo:.2f} reais.')
