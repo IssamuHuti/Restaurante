@@ -23,13 +23,14 @@ print('VENDAS DO DIA')
 vendas_pratos = {}
 vendas_bebidas = {}
 
-caminho_cardapio = os.path.join(__file__, 'cardapio', 'cardapio.json')
+caminho_cardapio = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio', 'cardapio.json')
 with open(caminho_cardapio, 'r', encoding='utf8') as arquivo:
     cardapio_vendas = json.load(arquivo)
 
 # problema para criar caminho para acessar arquivo json
 
 while True:
+    limpar()
     while True:
         venda_prato = input('Prato: ')
         if verificar_prato(venda_prato):

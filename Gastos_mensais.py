@@ -20,14 +20,13 @@ total_gastos = {}
 gastos_categoria = {}
 gastos_variaveis = {}
 gastos_fixos = {}
-gastos_bebidas = {}
-tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V) ou Bebida (B): ')
+tipo_gasto = input('Informe se o gasto é Fixo (F) ou Variável (V): ')
 
 while True:
-    while tipo_gasto.upper() != 'F' and tipo_gasto.upper() != 'V' and tipo_gasto.upper() != 'B':
+    while tipo_gasto.upper() != 'F' and tipo_gasto.upper() != 'V':
         limpar()
-        print('Digite somente (F), (V) ou (B)')
-        tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V) ou Bebida (B): ')
+        print('Digite somente (F) ou (V)')
+        tipo_gasto = input('Informe se o gasto é Fixo (F) ou Variável (V): ')
 
     limpar()
 
@@ -41,11 +40,6 @@ while True:
         valor_gasto_variavel = input('R$ ')
         gastos_variaveis.update({gasto_variavel: float(valor_gasto_variavel)})
         limpar()
-    elif tipo_gasto.upper() == 'B':
-        gasto_bebida = input('Gasto com bebida: ')
-        valor_gasto_bebida = input('R$ ')
-        gastos_bebidas.update({gasto_bebida: float(valor_gasto_bebida)})
-        limpar()
     
     incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N) ')
     while incluir.upper() != 'S' and incluir.upper() != 'N':
@@ -54,20 +48,17 @@ while True:
         incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N)  ')
     if incluir.upper() == 'S':
         limpar()
-        tipo_gasto = input('Informe se o gasto é Fixo (F), Variável (V) ou Bebida (B): ')
+        tipo_gasto = input('Informe se o gasto é Fixo (F) ou Variável (V): ')
     else:
         break
 
 total_gasto_fixo = round(sum(gastos_fixos.values()), 2)
 total_gasto_variavel = round(sum(gastos_variaveis.values()), 2)
-total_gasto_bebida = round(sum(gastos_bebidas.values()), 2)
 total_gastos['Gastos_fixos'] = total_gasto_fixo
 total_gastos['Gastos_variaveis'] = total_gasto_variavel
-total_gastos['Gastos_bebidas'] = total_gasto_bebida
 
 gastos_categoria.update({'Gastos fixos': gastos_fixos})
 gastos_categoria.update({'Gastos variáveis': gastos_variaveis})
-gastos_categoria.update({'Gastos bebidas': gastos_bebidas})
 
 dados_gasto_mes = {'Total de gasto':total_gastos, 'Gastos por categoria':gastos_categoria}
 
@@ -79,12 +70,17 @@ with open('gasto_mensal.json', 'w', encoding='utf8') as arquivo:
         indent=3,
     )
 
+# precisa puxar todas as compras das pastas compra_mantimentos e compras_bebidas
 with open('compra_mantimentos.json', 'r', encoding='utf8') as arquivo:
     arquivo_matimentos = json.load(arquivo)
-total = arquivo_matimentos['Total de gasto']
+total_mantimentos = arquivo_matimentos['Total de gasto']
+
+with open('compra_bebidas.json', 'r', encoding='utf8') as arquivo:
+    arquivo_bebidas = json.load(arquivo)
+total_bebidas = arquivo_bebidas['Total de gasto']
 
 data_lista()
 print(f'O total dos gastos fixos foram: {total_gasto_fixo:.2f} reais.')
 print(f'O total dos gastos variávies foram: {total_gasto_variavel:.2f} reais.')
-print(f'O total dos gastos com bebidas foram: {total_gasto_bebida:.2f} reais.')
-print(f'O total dos gastos com mantimentos foram: {total:.2f} reais.')
+print(f'O total dos gastos com bebidas foram: {total_bebidas:.2f} reais.')
+print(f'O total dos gastos com mantimentos foram: {total_mantimentos:.2f} reais.')
