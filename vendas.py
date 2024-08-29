@@ -32,36 +32,30 @@ with open(caminho_cardapio, 'r', encoding='utf8') as arquivo:
 while True:
     limpar()
     while True:
-        venda_prato = input('Prato: ')
-        if verificar_prato(venda_prato):
+        venda_item = input('Prato: ')
+        if verificar_prato(venda_item):
             break
         else:
-            print('Informe o prato que está no cardápio')
+            print('Informe um item que está no cardápio')
     qtd_prato = input('Quantidade vendida: ')
-    venda_duplicada(venda_prato, int(qtd_prato))
+    venda_duplicada(venda_item, int(qtd_prato))
 
-    mais_venda = input('Teve outros pratos vendidos? Sim (S) Não (N) ')
+    mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
     if mais_venda.upper() == 'S':
         continue
     elif mais_venda.upper() == 'N':
         break
     while mais_venda.upper() != 'S' and mais_venda.upper() != 'N':
         print('Digite somente "S" ou "N"')
-        mais_venda = input('Teve outros pratos vendidos? Sim (S) Não (N) ')
+        mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
 
 print(vendas_pratos)
 vendas_dia = {'data': data_formatada, 'Vendas_pratos': vendas_pratos}
 
-    # venda_bebida = input('Bebida: ')
-    # while venda_prato not in cardapio_vendas():
-    #     print('Informe o prato que está no cardápio')
-    #     venda_prato = input('Prato: ')
-
 pasta_salva = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'vendas_diarias')
-os.makedirs(os.path.dirname(os.path.abspath(__file__)), exist_ok=True)
+os.makedirs(pasta_salva, exist_ok=True)
 
 arquivo_venda_dia = os.path.join(pasta_salva, 'venda_{}.json'.format(str(data_formatada)))
-
 with open(arquivo_venda_dia, 'w', encoding='utf8') as arquivo_json:
     json.dump(
         vendas_dia,

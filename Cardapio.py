@@ -56,10 +56,10 @@ print(f'Prato: {novo_prato}')
 for ingrediente, medidas in ingredientes.items():
         print(f'{ingrediente}: {medidas[0]} {medidas[1]}')
 
-pasta_salva = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
-os.makedirs(os.path.dirname(os.path.abspath(__file__)), exist_ok=True)
+pasta_cardapio = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
+os.makedirs(pasta_cardapio, exist_ok=True)
 
-card = os.path.join(pasta_salva, 'cardapio.json')
+card = os.path.join(pasta_cardapio, 'cardapio.json')
 
 with open(card, 'w', encoding='utf8') as arquivo:
     json.dump(

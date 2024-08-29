@@ -30,7 +30,7 @@ while True:
     produtos.update({produto: float(preco)})
     qtd_produto = input('Quantidade: ')
     preco_unitario_produto = round(float(preco) / int(qtd_produto), 2)
-    qtd_produtos.update({produto: [qtd_produto, preco_unitario_produto]})
+    qtd_produtos.update({produto: qtd_produto})
 
 total_gasto_produtos = round(sum(produtos.values()), 2)
 
@@ -39,7 +39,8 @@ estoque_mantimentos = {'Data': data_formatada, 'Gasto por mantimento': qtd_produ
 
 pasta_salva_gastos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'gastos')
 pasta_salva_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'estoque')
-os.makedirs(os.path.dirname(os.path.abspath(__file__)), exist_ok=True)
+os.makedirs(pasta_salva_gastos, exist_ok=True)
+os.makedirs(pasta_salva_estoque, exist_ok=True)
 
 compra_mantimentos_dia = os.path.join(pasta_salva_gastos, 'compra_mantimentos_{}.json'.format(str(data_formatada)))
 compra_mantimentos_estoque = os.path.join(pasta_salva_estoque, 'estoque_mantimentos_{}.json'.format(str(data_formatada)))
