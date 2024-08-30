@@ -1,7 +1,7 @@
 {
   "Data": "27_08_2024",
-  "Gasto por mantimento": {
-    "sal": "2",
-    "fraudinha": "1"
+  "Estoque_mantimento": {
+    "sal": 2,
+    "fraudinha": 1
   }
 }

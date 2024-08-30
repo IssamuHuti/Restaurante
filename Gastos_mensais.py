@@ -71,7 +71,7 @@ with open('gasto_mensal.json', 'w', encoding='utf8') as arquivo:
         indent=3,
     )
 
-pasta_compra_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos')
+pasta_compra_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'gastos')
 compras_mantimentos_combinados = defaultdict(float)
 
 for arquivo_compra_mantimento in os.listdir(pasta_compra_mantimentos):
@@ -85,7 +85,7 @@ for arquivo_compra_mantimento in os.listdir(pasta_compra_mantimentos):
 
 total_mantimentos = round(sum(compras_mantimentos_combinados.values()), 2)
 
-pasta_compra_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas')
+pasta_compra_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'gastos')
 compras_bebidas_combinados = defaultdict(float)
 
 for arquivo_compra_bebida in os.listdir(pasta_compra_bebidas):

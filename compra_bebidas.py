@@ -19,8 +19,8 @@ bebida = input('Produto: ')
 preco_bebida = input('R$ ')
 bebidas.update({bebida: float(preco_bebida)})
 qtd_bebida = input('Quantidade: ')
-preco_unitario_bebida = round(float(preco_bebida) / int(qtd_bebida), 2)
-qtd_bebidas.update({bebida: [qtd_bebida, preco_unitario_bebida]})
+# preco_unitario_bebida = round(float(preco_bebida) / int(qtd_bebida), 2)
+qtd_bebidas.update({bebida: int(qtd_bebida)})
 while True:
     limpar()
     bebida = input('Produto: ')
@@ -29,8 +29,8 @@ while True:
     preco_bebida = input('R$ ')
     bebidas.update({bebida: float(preco_bebida)})
     qtd_bebida = input('Quantidade: ')
-    preco_unitario_bebida = round(float(preco_bebida) / int(qtd_bebida), 2)
-    qtd_bebidas.update({bebida: [qtd_bebida, preco_unitario_bebida]})
+    # preco_unitario_bebida = round(float(preco_bebida) / int(qtd_bebida), 2)
+    qtd_bebidas.update({bebida: int(qtd_bebida)})
 
 total_gasto_bebidas = round(sum(bebidas.values()), 2)
 
