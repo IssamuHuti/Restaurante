@@ -1,30 +1,20 @@
 {
   "pão": {
-    "trigo": [
-      "400",
-      "g"
-    ],
-    "ovo": [
-      "6",
-      "unidade"
-    ],
-    "fermento": [
-      "2",
-      "colher sopa"
-    ],
-    "sal": [
-      "4",
-      "pitadas"
-    ]
-  },
-  "ovo frito": {
-    "ovo": [
-      "1",
-      "ud"
-    ],
-    "sal": [
-      "1",
-      "pitada"
-    ]
+    "farinha": {
+      "Medida": "1000",
+      "Unidade": "g"
+    },
+    "ovo": {
+      "Medida": "8",
+      "Unidade": "unid"
+    },
+    "fermento": {
+      "Medida": "20",
+      "Unidade": "g"
+    },
+    "sal": {
+      "Medida": "50",
+      "Unidade": "g"
+    }
   }
 }
