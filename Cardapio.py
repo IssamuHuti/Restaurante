@@ -36,7 +36,7 @@ while cadastrar_vizualizar_cardapio.upper() != 'C' and cadastrar_vizualizar_card
     else:
         break
 
-caminho_cardapio_json = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
+caminho_cardapio_pasta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
 
 if cadastrar_vizualizar_cardapio.upper() == 'C':
     pratos = {}
@@ -86,7 +86,15 @@ if cadastrar_vizualizar_cardapio.upper() == 'C':
             indent=2,
         )
 
+caminho_cardapio_json = os.path.join(caminho_cardapio_pasta, 'cardapio.json')
 if cadastrar_vizualizar_cardapio.upper() == 'V':
     with open(caminho_cardapio_json, 'r', encoding='utf8') as arquivo_cardapio:
         dados_cardapio = json.load(arquivo_cardapio)
-        print(dados_cardapio)
+        for pr, ings in dados_cardapio.items():            
+            print(pr)
+            for ing, md in ings.items():
+                print(f'- {ing}')
+                print(f'    {md}')
+                # for i, j in md:
+                #     print(i['Medida'] j['Unidade'])
+            print()
