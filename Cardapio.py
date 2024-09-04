@@ -94,7 +94,7 @@ if cadastrar_vizualizar_cardapio.upper() == 'V':
             print(pr)
             for ing, md in ings.items():
                 print(f'- {ing}')
-                print(f'    {md}')
-                # for i, j in md:
-                #     print(i['Medida'] j['Unidade'])
+                mds = list(md.values())
+                for i in range(0, len(mds), 2):
+                    print(f'    {mds[0]} {mds[1]}')
             print()
