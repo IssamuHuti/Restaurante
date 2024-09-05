@@ -1,0 +1,17 @@
+{
+    "Mantimentos": {
+        "amendoim": 300,
+        "halls": 80,
+        "sal": 2,
+        "fraudinha": 1,
+        "leite": 30,
+        "ovo": 24,
+        "pão": 20
+    },
+    "Bebidas": {
+        "coca": 12,
+        "fant": 10,
+        "sprit": 20,
+        "soda": 12
+    }
+}

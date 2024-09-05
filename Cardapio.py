@@ -77,7 +77,7 @@ if cadastrar_vizualizar_cardapio.upper() == 'C':
     os.makedirs(pasta_cardapio, exist_ok=True)
 
     card = os.path.join(pasta_cardapio, 'cardapio.json')
-
+    pratos2 = pratos.update()
     with open(card, 'w', encoding='utf8') as arquivo:
         json.dump(
             pratos,

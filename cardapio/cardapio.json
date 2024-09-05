@@ -1,20 +1,16 @@
 {
-  "pão": {
-    "farinha": {
-      "Medida": "1000",
-      "Unidade": "g"
-    },
+  "omelete": {
     "ovo": {
-      "Medida": "8",
-      "Unidade": "unid"
+      "Medida": "sal",
+      "Unidade": "20"
     },
-    "fermento": {
-      "Medida": "20",
-      "Unidade": "g"
+    "pimenta": {
+      "Medida": "g",
+      "Unidade": "5"
     },
-    "sal": {
-      "Medida": "50",
-      "Unidade": "g"
+    "paprica": {
+      "Medida": "10",
+      "Unidade": "10"
     }
   }
 }
