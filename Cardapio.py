@@ -37,16 +37,24 @@ while cadastrar_vizualizar_cardapio.upper() != 'C' and cadastrar_vizualizar_card
         break
 
 caminho_cardapio_pasta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
+os.makedirs(caminho_cardapio_pasta, exist_ok=True)
 
 if cadastrar_vizualizar_cardapio.upper() == 'C':
-    pratos = {}
+    card = os.path.join(caminho_cardapio_pasta, 'cardapio.json')
+    if os.path.exists(card):
+        with open(card, 'r', encoding='utf8') as arquivo:
+            try:
+                cardapios = json.load(arquivo)
+            except json.JSONDecodeError:
+                cardapios = {}
     while True:
         novo_prato = input('Informe o nome do novo prato (ou "pare" para finalizar): ')
         if novo_prato.lower() == 'pare':
             break
 
         ingredientes = {}
-
+        limpar()
+        print(novo_prato)
         ingrediente, medidas = obter_ingrediente()
         if ingrediente is None:
             break
@@ -58,7 +66,7 @@ if cadastrar_vizualizar_cardapio.upper() == 'C':
                 break
             ingredientes.update({ingrediente: medidas})
         
-        pratos.update({novo_prato: ingredientes})
+        cardapios[ingrediente] = medidas
 
         limpar()
         mais_um_prato = input('Deseja cadastrar mais um prato? Sim (S) Não (N)')
@@ -73,14 +81,9 @@ if cadastrar_vizualizar_cardapio.upper() == 'C':
 
     composicao_prato()
 
-    pasta_cardapio = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
-    os.makedirs(pasta_cardapio, exist_ok=True)
-
-    card = os.path.join(pasta_cardapio, 'cardapio.json')
-    pratos2 = pratos.update()
     with open(card, 'w', encoding='utf8') as arquivo:
         json.dump(
-            pratos,
+            cardapios,
             arquivo,
             ensure_ascii=False,
             indent=2,
