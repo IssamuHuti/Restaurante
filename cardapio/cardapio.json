@@ -1,0 +1,34 @@
+{
+  "pão": {
+    "farinha": {
+      "Medida": "1000",
+      "Unidade": "g"
+    },
+    "ovo": {
+      "Medida": "4",
+      "Unidade": "unid"
+    },
+    "fermento": {
+      "Medida": "20",
+      "Unidade": "g"
+    },
+    "sal": {
+      "Medida": "50",
+      "Unidade": "g"
+    }
+  },
+  "omelete": {
+    "ovo": {
+      "Medida": "1",
+      "Unidade": "unid"
+    },
+    "shoyu": {
+      "Medida": "10",
+      "Unidade": "ml"
+    },
+    "sal": {
+      "Medida": "5",
+      "Unidade": "g"
+    }
+  }
+}
