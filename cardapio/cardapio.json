@@ -30,5 +30,47 @@
       "Medida": "5",
       "Unidade": "g"
     }
+  },
+  "macarrão": {
+    "macarrão": {
+      "Medida": "800",
+      "Unidade": "g"
+    },
+    "extrato tomate": {
+      "Medida": "2",
+      "Unidade": "unid"
+    },
+    "carne moida": {
+      "Medida": "1000",
+      "Unidade": "g"
+    },
+    "sal": {
+      "Medida": "30",
+      "Unidade": "g"
+    },
+    "pimenta": {
+      "Medida": "20",
+      "Unidade": "g"
+    },
+    "paprica": {
+      "Medida": "20",
+      "Unidade": "g"
+    },
+    "cebola": {
+      "Medida": "2",
+      "Unidade": "unid"
+    },
+    "alho": {
+      "Medida": "6",
+      "Unidade": "dentes"
+    },
+    "agua": {
+      "Medida": "1,5",
+      "Unidade": "l"
+    },
+    "salsinha": {
+      "Medida": "20",
+      "Unidade": "g"
+    }
   }
 }
