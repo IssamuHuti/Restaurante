@@ -18,9 +18,12 @@ def obter_ingrediente():
     return ingrediente, medida
 
 def composicao_prato():
-    print(f'Prato: {novo_prato}')
-    for ingrediente, medidas in ingredientes.items():   
-        print(f'{ingrediente}: {medidas}')
+    try:
+        print(f'Prato: {novo_prato}')
+        for ingrediente, medidas in ingredientes.items():   
+            print(f'{ingrediente}: {medidas}')
+    except:
+        print('Nada foi informado!')
 
 limpar()
 
@@ -121,12 +124,12 @@ while True:
             elif retirada_prato.upper() == 'N':
                 break
 
-    fechar_cardapio = input('Deseja fechar o cardápio? Sim(S) Não(N): ')
-    while fechar_cardapio.upper() != 'S' and fechar_cardapio.upper() != 'N':
-        print('Digite "S" ou "N"')
         fechar_cardapio = input('Deseja fechar o cardápio? Sim(S) Não(N): ')
-    if fechar_cardapio == 'S':
-        break # problema para parar o looping
-    else:
-        continue
-        
+        while fechar_cardapio.upper() != 'S' and fechar_cardapio.upper() != 'N':
+            print('Digite "S" ou "N"')
+            fechar_cardapio = input('Deseja fechar o cardápio? Sim(S) Não(N): ')
+        if fechar_cardapio == 'S':
+            break # problema para parar o looping
+        else:
+            continue
+    break

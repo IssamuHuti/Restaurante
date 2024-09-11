@@ -72,5 +72,43 @@
       "Medida": "20",
       "Unidade": "g"
     }
+  },
+  "arroz frito": {
+    "arroz": {
+      "Medida": "400",
+      "Unidade": "g"
+    },
+    "agua": {
+      "Medida": "600",
+      "Unidade": "ml"
+    },
+    "ovo": {
+      "Medida": "4",
+      "Unidade": "unid"
+    },
+    "sal": {
+      "Medida": "50",
+      "Unidade": "g"
+    },
+    "pimenta do reino": {
+      "Medida": "50",
+      "Unidade": "g"
+    },
+    "cenoura": {
+      "Medida": "2",
+      "Unidade": "unid"
+    },
+    "acelga": {
+      "Medida": "4",
+      "Unidade": "folhas"
+    },
+    "shoyu": {
+      "Medida": "200",
+      "Unidade": "ml"
+    },
+    "coxão mole": {
+      "Medida": "400",
+      "Unidade": "g"
+    }
   }
 }
