@@ -60,7 +60,7 @@ while True:
                 if novo_prato.lower() == 'pare':
                     break
 
-                ingredientes = {} # não reconhece a variável
+                ingredientes = {}
                 limpar()
                 print(novo_prato)
                 ingrediente, medidas = obter_ingrediente()
@@ -96,6 +96,7 @@ while True:
                     ensure_ascii=False,
                     indent=2,
                 )
+            break
 
         caminho_cardapio_arquivo = os.path.join(caminho_cardapio_pasta, 'cardapio.json')
         if cadastrar_vizualizar_cardapio.upper() == 'V':
@@ -121,15 +122,15 @@ while True:
                     print(f'{prato_a_retirar} foi retirado do cardápio!') # não foi retirado o prato
                 else:
                     print(f'O prato digitado não foi encontrada no cardápio')
+                break
             elif retirada_prato.upper() == 'N':
                 break
 
+    fechar_cardapio = input('Deseja fechar o cardápio? Sim(S) Não(N): ')
+    while fechar_cardapio.upper() != 'S' and fechar_cardapio.upper() != 'N':
+        print('Digite "S" ou "N"')
         fechar_cardapio = input('Deseja fechar o cardápio? Sim(S) Não(N): ')
-        while fechar_cardapio.upper() != 'S' and fechar_cardapio.upper() != 'N':
-            print('Digite "S" ou "N"')
-            fechar_cardapio = input('Deseja fechar o cardápio? Sim(S) Não(N): ')
-        if fechar_cardapio == 'S':
-            break # problema para parar o looping
-        else:
-            continue
-    break
+    if fechar_cardapio.upper() == 'S':
+        break
+    else:
+        continue
