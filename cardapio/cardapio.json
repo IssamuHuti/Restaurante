@@ -110,31 +110,5 @@
       "Medida": "400",
       "Unidade": "g"
     }
-  },
-  "hamburguer": {
-    "carne moida": {
-      "Medida": "1000",
-      "Unidade": "g"
-    },
-    "sal": {
-      "Medida": "30",
-      "Unidade": "g"
-    },
-    "pimenta": {
-      "Medida": "30",
-      "Unidade": "g"
-    },
-    "salsinha": {
-      "Medida": "10",
-      "Unidade": "g"
-    },
-    "alho": {
-      "Medida": "4",
-      "Unidade": "dentes"
-    },
-    "cebola": {
-      "Medida": "1",
-      "Unidade": "unid"
-    }
   }
 }

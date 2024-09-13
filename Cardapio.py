@@ -111,6 +111,7 @@ while True:
                             print(f'{mds[0]} {mds[1]}')
                     print()
             
+            # adicionar função para alterar os dados dos clientes
             retirada_prato = input('Deseja retirar algum prato do cardápio? Sim(S) Não(N) ')
             while retirada_prato.upper() != 'S' and retirada_prato.upper() != 'N':
                 print('Digite "S" ou "N"')
@@ -119,7 +120,14 @@ while True:
                 prato_a_retirar = input('Escolha o prato que será retirado: ')
                 if prato_a_retirar in dados_cardapio:
                     del dados_cardapio[prato_a_retirar]
-                    print(f'{prato_a_retirar} foi retirado do cardápio!') # não foi retirado o prato
+                    print(f'{prato_a_retirar} foi retirado do cardápio!')
+                    with open(caminho_cardapio_arquivo, 'w', encoding='utf8') as arquivo_cardapio:
+                        json.dump(
+                            dados_cardapio,
+                            arquivo_cardapio,
+                            ensure_ascii=False,
+                            indent=2,
+                        )
                 else:
                     print(f'O prato digitado não foi encontrada no cardápio')
                 break
@@ -134,3 +142,5 @@ while True:
         break
     else:
         continue
+
+# adicionar o menu de bebidas conforme está no estoque

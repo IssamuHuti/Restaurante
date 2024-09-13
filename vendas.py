@@ -27,8 +27,6 @@ caminho_cardapio = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'car
 with open(caminho_cardapio, 'r', encoding='utf8') as arquivo:
     cardapio_vendas = json.load(arquivo)
 
-# problema para criar caminho para acessar arquivo json
-
 while True:
     limpar()
     while True:
