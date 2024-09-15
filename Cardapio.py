@@ -143,15 +143,14 @@ while True:
     else:
         continue
 
-# adicionar o menu de bebidas conforme está no estoque
 limpar()
 print('Bebidas')
-caminho_estoque = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque'), 
-                               'estoque_dia_12_09_2024.json')
-with open(caminho_estoque, 'r', encoding='utf8') as arquivo_estoque_bebida:
+caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
+arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
+if arquivos_json:
+    arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
+caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
+with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque_bebida:
     dados_cardapio_bebida = json.load(arquivo_estoque_bebida)
     for beb in dados_cardapio_bebida['Bebidas'].keys():
         print(f'- {beb}')
-
-print()
-opcao_bebida = input('Escolha uma bebida: ')

@@ -35,7 +35,7 @@ while True:
 total_gasto_bebidas = round(sum(bebidas.values()), 2)
 
 arquivo_bebidas = {'Data': data_formatada, 'Total de gasto': total_gasto_bebidas, 'Produtos': bebidas}
-estoque_bebidas = {'Data': data_formatada, 'Gasto por bebida': qtd_bebidas}
+estoque_bebidas = {'Data': data_formatada, 'Estoque_bebida': qtd_bebidas}
 
 pasta_salva_gastos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'gastos')
 pasta_salva_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')

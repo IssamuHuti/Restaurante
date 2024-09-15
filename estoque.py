@@ -39,8 +39,6 @@ for arquivo_estoque_bebida in os.listdir(pasta_estoque_bebidas):
                 estoque_bebidas_combinados[item] += qtd_bebida
 estoque_bebidas.update(estoque_bebidas_combinados)
 
-
-
 estoque_combinados = {"Mantimentos": dict(estoque_mantimentos_combinados), "Bebidas": dict(estoque_bebidas_combinados)}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(str(data_formatada))
 caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque', arquivo_estoque_dia))
