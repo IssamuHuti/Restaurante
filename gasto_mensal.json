@@ -1,12 +1,14 @@
 {
    "Total de gasto": {
-      "Gastos_fixos": 500.0,
-      "Gastos_variaveis": 0
+      "Gastos_fixos": 200.0,
+      "Gastos_variaveis": 400.0
    },
    "Gastos por categoria": {
       "Gastos fixos": {
-         "luz": 500.0
+         "agua": 200.0
       },
-      "Gastos variáveis": {}
+      "Gastos variáveis": {
+         "freelancer": 400.0
+      }
    }
 }

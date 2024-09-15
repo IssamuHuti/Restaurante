@@ -54,4 +54,10 @@ pasta_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoqu
 os.makedirs(pasta_estoque, exist_ok=True)
 
 for elemento, qtd in estoque_combinados.items():
-    print(elemento, qtd)
+    print(elemento)
+    for q, m in qtd.items():
+        print(f'- {q}: {m}')
+    print()
+
+unidade_medida = ['ml', 'unid', 'g', 'fls', 'dentes']
+convert_medida = {'Kg': '1000 g', 'L': '1000 ml'}

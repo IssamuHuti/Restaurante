@@ -19,7 +19,7 @@ produto = input('Produto: ')
 preco = input('R$ ')
 produtos.update({produto: float(preco)})
 qtd_produto = input('Quantidade: ')
-# preco_unitario_produto = round(float(preco) / int(qtd_produto), 2)
+und_medida = input('Medida: ') # adicionar unidade de medida dentro da biblioteca
 qtd_produtos.update({produto: int(qtd_produto)})
 while True:
     limpar()
@@ -29,13 +29,14 @@ while True:
     preco = input('R$ ')
     produtos.update({produto: float(preco)})
     qtd_produto = input('Quantidade: ')
-    # preco_unitario_produto = round(float(preco) / int(qtd_produto), 2)
+    und_medida = input('Medida: ') # adicionar unidade de medida dentro da biblioteca
     qtd_produtos.update({produto: int(qtd_produto)})
 
 total_gasto_produtos = round(sum(produtos.values()), 2)
 
 arquivo_matimentos = {'Data': data_formatada, 'Total de gasto': total_gasto_produtos, 'Produtos': produtos}
 estoque_mantimentos = {'Data': data_formatada, 'Estoque_mantimento': qtd_produtos}
+# acrescentar unidade de medida em estoque_mantimentos
 
 pasta_salva_gastos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'gastos')
 pasta_salva_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'estoque')
