@@ -20,7 +20,8 @@ preco = input('R$ ')
 produtos.update({produto: float(preco)})
 qtd_produto = input('Quantidade: ')
 und_medida = input('Medida: ') # adicionar unidade de medida dentro da biblioteca
-qtd_produtos.update({produto: int(qtd_produto)})
+produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida}
+qtd_produtos.update({produto: produto_med})
 while True:
     limpar()
     produto = input('Produto: ')
@@ -30,7 +31,8 @@ while True:
     produtos.update({produto: float(preco)})
     qtd_produto = input('Quantidade: ')
     und_medida = input('Medida: ') # adicionar unidade de medida dentro da biblioteca
-    qtd_produtos.update({produto: int(qtd_produto)})
+    produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida}
+    qtd_produtos.update({produto: produto_med})
 
 total_gasto_produtos = round(sum(produtos.values()), 2)
 
@@ -64,7 +66,8 @@ with open(compra_mantimentos_estoque, 'w', encoding='utf8') as arquivo:
     )
 
 for detalhe, mais_detalhe in arquivo_matimentos.items():
+    print(detalhe, mais_detalhe)
     if type(mais_detalhe) == dict:
         for i, j in mais_detalhe.items():
             print('- ', i, j)
-    print(detalhe, mais_detalhe)
+    

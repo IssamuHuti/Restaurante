@@ -1,0 +1,13 @@
+{
+  "Data": "16_09_2024",
+  "Estoque_mantimento": {
+    "arroz": {
+      "Qtd": 10,
+      "Medida": "kg"
+    },
+    "molho tomate": {
+      "Qtd": 5,
+      "Medida": "unid"
+    }
+  }
+}
