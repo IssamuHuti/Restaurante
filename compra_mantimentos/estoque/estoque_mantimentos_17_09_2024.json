@@ -1,0 +1,21 @@
+{
+  "Data": "17_09_2024",
+  "Estoque_mantimento": {
+    "oleo": {
+      "Qtd": 5,
+      "Medida": "l"
+    },
+    "sal": {
+      "Qtd": 2,
+      "Medida": "kg"
+    },
+    "pimenta": {
+      "Qtd": 150,
+      "Medida": "g"
+    },
+    "ovo": {
+      "Qtd": 24,
+      "Medida": "unid"
+    }
+  }
+}

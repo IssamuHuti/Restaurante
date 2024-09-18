@@ -22,7 +22,7 @@ for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
             dados = json.load(arquivo_estoque_mantimento)
             estoques_itens_mantimentos = dados.get("Estoque_mantimento", {})
             for item, qtd_mantimento in estoques_itens_mantimentos.items():
-                estoque_mantimentos_combinados[item] += qtd_mantimento
+                estoque_mantimentos_combinados[item] += qtd_mantimento['Qtd'] # como adicionar unidade de medida
 estoque_mantimentos.update(estoque_mantimentos_combinados)
 
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
