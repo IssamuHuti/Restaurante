@@ -15,6 +15,7 @@ pasta_estoque_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file_
 estoque_mantimentos_combinados = defaultdict(int)
 
 estoque_mantimentos = {}
+mantimento_combinados_medidas = {}
 for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
     if arquivo_estoque_mantimento.endswith('.json'):
         caminho_arquivo_mantimento = os.path.join(pasta_estoque_mantimentos, arquivo_estoque_mantimento)
@@ -22,7 +23,14 @@ for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
             dados = json.load(arquivo_estoque_mantimento)
             estoques_itens_mantimentos = dados.get("Estoque_mantimento", {})
             for item, qtd_mantimento in estoques_itens_mantimentos.items():
-                estoque_mantimentos_combinados[item] += qtd_mantimento['Qtd'] # como adicionar unidade de medida
+                estoque_mantimentos_combinados[item] += qtd_mantimento['Qtd']
+for prod, qtd in estoque_mantimentos_combinados.items():
+    with open(caminho_arquivo_mantimento, 'r', encoding='utf8') as arquivo_estoque_mantimento:
+            dados = json.load(arquivo_estoque_mantimento)
+            estoques_itens_mantimentos = dados.get("Estoque_mantimento", {})
+            for item, qtd_mantimento in estoques_itens_mantimentos.items():
+                mantimento_combinados_medidas.update(qtd_mantimento) # não está adicionando novas informações no dicionário
+    print(prod, qtd)
 estoque_mantimentos.update(estoque_mantimentos_combinados)
 
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
