@@ -12,7 +12,7 @@ data_formatada = data_compra.strftime('%d_%m_%Y')
 print('Data: ', data_formatada)
 
 pasta_estoque_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'estoque')
-estoque_mantimentos_combinados = defaultdict(int)
+estoque_mantimentos_combinados = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
 
 estoque_mantimentos = {}
 mantimento_combinados_medidas = {}
@@ -23,14 +23,9 @@ for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
             dados = json.load(arquivo_estoque_mantimento)
             estoques_itens_mantimentos = dados.get("Estoque_mantimento", {})
             for item, qtd_mantimento in estoques_itens_mantimentos.items():
-                estoque_mantimentos_combinados[item] += qtd_mantimento['Qtd']
-for prod, qtd in estoque_mantimentos_combinados.items():
-    with open(caminho_arquivo_mantimento, 'r', encoding='utf8') as arquivo_estoque_mantimento:
-            dados = json.load(arquivo_estoque_mantimento)
-            estoques_itens_mantimentos = dados.get("Estoque_mantimento", {})
-            for item, qtd_mantimento in estoques_itens_mantimentos.items():
-                mantimento_combinados_medidas.update(qtd_mantimento) # não está adicionando novas informações no dicionário
-    print(prod, qtd)
+                if estoque_mantimentos_combinados[item]['Medida'] == qtd_mantimento['Medida'] or not estoque_mantimentos_combinados[item]['Medida']:
+                    estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd']
+                    estoque_mantimentos_combinados[item]['Medida'] = qtd_mantimento['Medida']
 estoque_mantimentos.update(estoque_mantimentos_combinados)
 
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
