@@ -1,0 +1,33 @@
+{
+    "Mantimentos": {
+        "arroz": {
+            "Qtd": 10,
+            "Medida": "kg"
+        },
+        "molho tomate": {
+            "Qtd": 5,
+            "Medida": "unid"
+        },
+        "oleo": {
+            "Qtd": 5,
+            "Medida": "l"
+        },
+        "sal": {
+            "Qtd": 2,
+            "Medida": "kg"
+        },
+        "pimenta": {
+            "Qtd": 150,
+            "Medida": "g"
+        },
+        "ovo": {
+            "Qtd": 24,
+            "Medida": "unid"
+        }
+    },
+    "Bebidas": {
+        "soda": 18,
+        "coca": 80,
+        "coca zero": 50
+    }
+}

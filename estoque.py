@@ -23,9 +23,17 @@ for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
             dados = json.load(arquivo_estoque_mantimento)
             estoques_itens_mantimentos = dados.get("Estoque_mantimento", {})
             for item, qtd_mantimento in estoques_itens_mantimentos.items():
-                if estoque_mantimentos_combinados[item]['Medida'] == qtd_mantimento['Medida'] or not estoque_mantimentos_combinados[item]['Medida']:
-                    estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd']
-                    estoque_mantimentos_combinados[item]['Medida'] = qtd_mantimento['Medida']
+                estoque_detalhado = estoque_mantimentos_combinados[item]['Medida']
+                if estoque_detalhado == qtd_mantimento['Medida'] or not estoque_detalhado:
+                    if qtd_mantimento['Medida'].upper() == 'L':
+                        estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd'] * 1000
+                        estoque_detalhado = 'ML'
+                    elif qtd_mantimento['Medida'].upper() == 'KG':
+                        estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd'] * 1000
+                        estoque_detalhado = 'G'
+                    else:
+                        estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd']
+                        estoque_detalhado = qtd_mantimento['Medida'].upper()
 estoque_mantimentos.update(estoque_mantimentos_combinados)
 
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
@@ -56,11 +64,17 @@ with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_co
 pasta_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque')
 os.makedirs(pasta_estoque, exist_ok=True)
 
-for elemento, qtd in estoque_combinados.items():
-    print(elemento)
-    for q, m in qtd.items():
-        print(f'- {q}: {m}')
-    print()
 
-unidade_medida = ['ml', 'unid', 'g', 'fls', 'dentes']
-convert_medida = {'Kg': '1000 g', 'L': '1000 ml'}
+for elemento, quantidade in estoque_combinados.items():
+    print(elemento)
+    if elemento == 'Mantimentos':
+        for qtd, medida in quantidade.items():
+            print(f'- {qtd}:', end=' ')
+            for qt, med in medida.items():
+                print(f'{med}', end=' ')
+            print()
+        print()
+    else:
+        for qtd, medida in quantidade.items():
+            print(f'- {qtd}: {medida}')
+        print()
