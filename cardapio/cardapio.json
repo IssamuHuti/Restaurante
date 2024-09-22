@@ -2,113 +2,113 @@
   "pão": {
     "farinha": {
       "Medida": "1000",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "ovo": {
       "Medida": "4",
-      "Unidade": "unid"
+      "Unidade": "UN"
     },
     "fermento": {
       "Medida": "20",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "sal": {
       "Medida": "50",
-      "Unidade": "g"
+      "Unidade": "G"
     }
   },
   "omelete": {
     "ovo": {
       "Medida": "1",
-      "Unidade": "unid"
+      "Unidade": "UN"
     },
     "shoyu": {
       "Medida": "10",
-      "Unidade": "ml"
+      "Unidade": "ML"
     },
     "sal": {
       "Medida": "5",
-      "Unidade": "g"
+      "Unidade": "G"
     }
   },
   "macarrão": {
     "macarrão": {
       "Medida": "800",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "extrato tomate": {
       "Medida": "2",
-      "Unidade": "unid"
+      "Unidade": "UN"
     },
     "carne moida": {
       "Medida": "1000",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "sal": {
       "Medida": "30",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "pimenta": {
       "Medida": "20",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "paprica": {
       "Medida": "20",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "cebola": {
       "Medida": "2",
-      "Unidade": "unid"
+      "Unidade": "UN"
     },
     "alho": {
       "Medida": "6",
-      "Unidade": "dentes"
+      "Unidade": "DNT"
     },
     "agua": {
-      "Medida": "1,5",
-      "Unidade": "l"
+      "Medida": "1500",
+      "Unidade": "ML"
     },
     "salsinha": {
       "Medida": "20",
-      "Unidade": "g"
+      "Unidade": "G"
     }
   },
   "arroz frito": {
     "arroz": {
       "Medida": "400",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "agua": {
       "Medida": "600",
-      "Unidade": "ml"
+      "Unidade": "ML"
     },
     "ovo": {
       "Medida": "4",
-      "Unidade": "unid"
+      "Unidade": "UN"
     },
     "sal": {
       "Medida": "50",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "pimenta do reino": {
       "Medida": "50",
-      "Unidade": "g"
+      "Unidade": "G"
     },
     "cenoura": {
       "Medida": "2",
-      "Unidade": "unid"
+      "Unidade": "UN"
     },
     "acelga": {
       "Medida": "4",
-      "Unidade": "folhas"
+      "Unidade": "FLS"
     },
     "shoyu": {
       "Medida": "200",
-      "Unidade": "ml"
+      "Unidade": "ML"
     },
     "coxão mole": {
       "Medida": "400",
-      "Unidade": "g"
+      "Unidade": "G"
     }
   }
 }

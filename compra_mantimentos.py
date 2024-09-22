@@ -31,7 +31,7 @@ while True:
     produtos.update({produto: float(preco)})
     qtd_produto = input('Quantidade: ')
     und_medida = input('Medida: ') # adicionar unidade de medida dentro da biblioteca
-    produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida}
+    produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida.upper()}
     qtd_produtos.update({produto: produto_med})
 
 total_gasto_produtos = round(sum(produtos.values()), 2)

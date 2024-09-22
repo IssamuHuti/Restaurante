@@ -100,6 +100,7 @@ while True:
 
         caminho_cardapio_arquivo = os.path.join(caminho_cardapio_pasta, 'cardapio.json')
         if cadastrar_vizualizar_cardapio.upper() == 'V':
+            limpar()
             with open(caminho_cardapio_arquivo, 'r', encoding='utf8') as arquivo_cardapio:
                 dados_cardapio = json.load(arquivo_cardapio)
                 for pr, ings in dados_cardapio.items():            
@@ -111,7 +112,6 @@ while True:
                             print(f'{mds[0]} {mds[1]}')
                     print()
             
-            # adicionar função para alterar os dados dos clientes
             retirada_prato = input('Deseja retirar algum prato do cardápio? Sim(S) Não(N) ')
             while retirada_prato.upper() != 'S' and retirada_prato.upper() != 'N':
                 print('Digite "S" ou "N"')

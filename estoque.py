@@ -78,3 +78,4 @@ for elemento, quantidade in estoque_combinados.items():
         for qtd, medida in quantidade.items():
             print(f'- {qtd}: {medida}')
         print()
+

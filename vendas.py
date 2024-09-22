@@ -1,6 +1,7 @@
 import os
 import json
 from datetime import datetime
+from collections import defaultdict
 
 def limpar():
     os.system('cls')
@@ -36,6 +37,25 @@ while True:
         else:
             print('Informe um item que está no cardápio')
     qtd_prato = input('Quantidade vendida: ')
+
+    # verificar se possui estoque de mantimentos suficiente para produzir a quantidade de pratos pedidos
+    # 1 - criar um caminho para acessar os itens dentro do cardápio por prato
+    # 2 - criar um caminho para puxar os itens no estoque
+    # 3 - fazer a comparação entre o estoque e a quantidade de insumos utilizados
+    caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
+    estoque_combinados = defaultdict(int)
+    arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
+    if arquivos_json:
+        arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
+    caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
+    with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+        dados_estoque = json.load(arquivo_estoque)
+        estoques_itens = dados_estoque.get("Estoque_mantimentos", {})
+        for mantimento, qtd_mantimento in estoques_itens.items():
+            estoque_combinados[mantimento] -= qtd_mantimento
+    # retirar a quantidade de mantimentos utilizadas para produzir os pratos
+    # atualizar a lista de estoque
+
     venda_duplicada(venda_item, int(qtd_prato))
 
     mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
@@ -61,3 +81,4 @@ with open(arquivo_venda_dia, 'w', encoding='utf8') as arquivo_json:
         ensure_ascii=False,
         indent=2,
     )
+
