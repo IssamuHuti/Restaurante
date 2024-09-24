@@ -42,6 +42,14 @@ while True:
     # 1 - criar um caminho para acessar os itens dentro do cardápio por prato
     # 2 - criar um caminho para puxar os itens no estoque
     # 3 - fazer a comparação entre o estoque e a quantidade de insumos utilizados
+    with open(caminho_cardapio, 'r', encoding='utf8') as arquivo_cardapio:
+        dados_cardapio = json.load(arquivo_cardapio)
+        for prato in dados_cardapio.items():
+            for ingrediente, quantidade in prato:
+                print(ingrediente, quantidade)
+
+
+    '''
     caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
     estoque_combinados = defaultdict(int)
     arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
@@ -50,9 +58,11 @@ while True:
     caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
-        estoques_itens = dados_estoque.get("Estoque_mantimentos", {})
+        estoques_itens = dados_estoque.get()
         for mantimento, qtd_mantimento in estoques_itens.items():
             estoque_combinados[mantimento] -= qtd_mantimento
+    '''
+
     # retirar a quantidade de mantimentos utilizadas para produzir os pratos
     # atualizar a lista de estoque
 

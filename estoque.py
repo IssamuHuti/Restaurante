@@ -39,7 +39,7 @@ estoque_mantimentos.update(estoque_mantimentos_combinados)
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
 estoque_bebidas_combinados = defaultdict(int)
 
-estoque_bebidas = {}
+# estoque_bebidas = {}
 for arquivo_estoque_bebida in os.listdir(pasta_estoque_bebidas):
     if arquivo_estoque_bebida.endswith('.json'):
         caminho_arquivo_bebidas = os.path.join(pasta_estoque_bebidas, arquivo_estoque_bebida)
@@ -48,7 +48,7 @@ for arquivo_estoque_bebida in os.listdir(pasta_estoque_bebidas):
             estoques_itens_bebidas = dados.get("Estoque_bebida", {})
             for item, qtd_bebida in estoques_itens_bebidas.items():
                 estoque_bebidas_combinados[item] += qtd_bebida
-estoque_bebidas.update(estoque_bebidas_combinados)
+# estoque_bebidas.update(estoque_bebidas_combinados)
 
 estoque_combinados = {"Mantimentos": dict(estoque_mantimentos_combinados), "Bebidas": dict(estoque_bebidas_combinados)}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(str(data_formatada))
