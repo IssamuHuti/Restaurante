@@ -44,18 +44,22 @@ while True:
     # 3 - fazer a comparação entre o estoque e a quantidade de insumos utilizados
     with open(caminho_cardapio, 'r', encoding='utf8') as arquivo_cardapio:
         dados_cardapio = json.load(arquivo_cardapio)
-        for prato in dados_cardapio.items():
-            for ingrediente, quantidade in prato:
-                print(ingrediente, quantidade)
+        # for prato, ingredientes in dados_cardapio.items():
+        #     print(prato)
+        #     for ingrediente, quantidade  in ingredientes.items():
+        #         print(f'- {ingrediente}: {quantidade['Medida']} {quantidade['Unidade']}')
+        #     print()
 
-
-    '''
     caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
-    estoque_combinados = defaultdict(int)
     arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
     if arquivos_json:
         arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
     caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
+    with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+        dados_estoque = json.load(arquivo_estoque)
+        dados_estoque_mantimentos = dados_estoque['Mantimentos']
+    '''
+    estoque_combinados = defaultdict(int)
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_itens = dados_estoque.get()
