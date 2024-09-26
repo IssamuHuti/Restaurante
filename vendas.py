@@ -42,24 +42,34 @@ while True:
     # 1 - criar um caminho para acessar os itens dentro do cardápio por prato
     # 2 - criar um caminho para puxar os itens no estoque
     # 3 - fazer a comparação entre o estoque e a quantidade de insumos utilizados
+    
     with open(caminho_cardapio, 'r', encoding='utf8') as arquivo_cardapio:
         dados_cardapio = json.load(arquivo_cardapio)
-        # for prato, ingredientes in dados_cardapio.items():
-        #     print(prato)
-        #     for ingrediente, quantidade  in ingredientes.items():
-        #         print(f'- {ingrediente}: {quantidade['Medida']} {quantidade['Unidade']}')
-        #     print()
+
+    mantimentos_usadas = {}
+    for prato, ingredientes in dados_cardapio.items():
+        if venda_item == prato:
+            print(prato)
+            for ingrediente, quantidade in ingredientes.items():
+                ingredientes_usadas = int(quantidade['Medida']) * int(qtd_prato)
+                print(f'- {ingrediente}: {ingredientes_usadas} {quantidade['Unidade']}')
+                mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas, 'Medida': quantidade['Unidade']}})
 
     caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
+    retirada_estoque = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
     arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
     if arquivos_json:
         arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
     caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
-        dados_estoque_mantimentos = dados_estoque['Mantimentos']
+        estoques_mantimentos = dados_estoque.get('Mantimentos', {})
+        for mantimento, qtd_mantimento in estoques_mantimentos.items():
+            if mantimento in mantimentos_usadas[ingrediente]: # não está seguindo a condicional
+                retirada_estoque[mantimento]['Qtd'] += qtd_mantimento['Qtd']
+                retirada_estoque[mantimento]['Qtd'] -= mantimentos_usadas[mantimento] # não está subtraindo o estoque
+
     '''
-    estoque_combinados = defaultdict(int)
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_itens = dados_estoque.get()
