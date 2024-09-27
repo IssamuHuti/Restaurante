@@ -49,11 +49,12 @@ while True:
     mantimentos_usadas = {}
     for prato, ingredientes in dados_cardapio.items():
         if venda_item == prato:
-            print(prato)
             for ingrediente, quantidade in ingredientes.items():
                 ingredientes_usadas = int(quantidade['Medida']) * int(qtd_prato)
                 print(f'- {ingrediente}: {ingredientes_usadas} {quantidade['Unidade']}')
                 mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas, 'Medida': quantidade['Unidade']}})
+            
+    lista_mantimentos_usadas = [nome for nome in mantimentos_usadas.keys()]
 
     caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
     retirada_estoque = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
@@ -64,10 +65,16 @@ while True:
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_mantimentos = dados_estoque.get('Mantimentos', {})
-        for mantimento, qtd_mantimento in estoques_mantimentos.items():
-            if mantimento in mantimentos_usadas[ingrediente]: # não está seguindo a condicional
-                retirada_estoque[mantimento]['Qtd'] += qtd_mantimento['Qtd']
-                retirada_estoque[mantimento]['Qtd'] -= mantimentos_usadas[mantimento] # não está subtraindo o estoque
+        for mantimento, qtd_mantimento in estoques_mantimentos.items(): # qtd_mantimento está sendo utilizada como base para demais estoques
+            if mantimento in lista_mantimentos_usadas:
+                for mant_usado in lista_mantimentos_usadas:
+                    if mant_usado in estoques_mantimentos.keys():
+                        retirada_estoque[mant_usado]['Qtd'] += qtd_mantimento['Qtd']
+                        retirada_estoque[mant_usado]['Qtd'] -= mantimentos_usadas[mant_usado]['Qtd']
+                    elif mantimento not in mantimentos_usadas[ingrediente]:
+                        limpar()
+                        print('Ingrediente inexistente no estoque')
+                        break
 
     '''
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
