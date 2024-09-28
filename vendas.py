@@ -65,9 +65,9 @@ while True:
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_mantimentos = dados_estoque.get('Mantimentos', {})
-        for mantimento, qtd_mantimento in estoques_mantimentos.items(): # qtd_mantimento está sendo utilizada como base para demais estoques
-            if mantimento in lista_mantimentos_usadas:
-                for mant_usado in lista_mantimentos_usadas:
+        for mantimento, qtd_mantimento in mantimentos_usadas.items(): # qtd_mantimento o primeiro item que foi achada está sendo utilizada como base para demais estoques
+            if mantimento in estoques_mantimentos:
+                for mant_usado in lista_mantimentos_usadas: # está repetindo a quantidade inicial de estoque
                     if mant_usado in estoques_mantimentos.keys():
                         retirada_estoque[mant_usado]['Qtd'] += qtd_mantimento['Qtd']
                         retirada_estoque[mant_usado]['Qtd'] -= mantimentos_usadas[mant_usado]['Qtd']
