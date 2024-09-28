@@ -65,26 +65,21 @@ while True:
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_mantimentos = dados_estoque.get('Mantimentos', {})
-        for mantimento, qtd_mantimento in mantimentos_usadas.items(): # qtd_mantimento o primeiro item que foi achada está sendo utilizada como base para demais estoques
+        for mantimento, qtd_mantimento in mantimentos_usadas.items():
             if mantimento in estoques_mantimentos:
-                for mant_usado in lista_mantimentos_usadas: # está repetindo a quantidade inicial de estoque
-                    if mant_usado in estoques_mantimentos.keys():
-                        retirada_estoque[mant_usado]['Qtd'] += qtd_mantimento['Qtd']
-                        retirada_estoque[mant_usado]['Qtd'] -= mantimentos_usadas[mant_usado]['Qtd']
-                    elif mantimento not in mantimentos_usadas[ingrediente]:
-                        limpar()
-                        print('Ingrediente inexistente no estoque')
-                        break
+                retirada_estoque[mantimento]['Qtd'] += estoques_mantimentos[mantimento]['Qtd']
+                if retirada_estoque[mantimento]['Qtd'] <= estoques_mantimentos[mantimento]['Qtd']:
+                    retirada_estoque[mantimento]['Qtd'] -= mantimentos_usadas[mantimento]['Qtd']
+                    estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
+                else: # não está entrando
+                    pode_produzir = estoques_mantimentos[mantimento]['Qtd'] // (retirada_estoque[mantimento]['Qtd'] / qtd_prato)
+                    print(f'Mantimentos suficientes para produzir {pode_produzir} pratos')
+                    estoques_mantimentos[mantimento]['Qtd'] -= pode_produzir
+            elif mantimento not in mantimentos_usadas[ingrediente]:
+                limpar()
+                print('Ingrediente inexistente no estoque')
+                break
 
-    '''
-    with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
-        dados_estoque = json.load(arquivo_estoque)
-        estoques_itens = dados_estoque.get()
-        for mantimento, qtd_mantimento in estoques_itens.items():
-            estoque_combinados[mantimento] -= qtd_mantimento
-    '''
-
-    # retirar a quantidade de mantimentos utilizadas para produzir os pratos
     # atualizar a lista de estoque
 
     venda_duplicada(venda_item, int(qtd_prato))

@@ -14,7 +14,7 @@ print('Data: ', data_formatada)
 pasta_estoque_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'estoque')
 estoque_mantimentos_combinados = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
 
-estoque_mantimentos = {}
+# estoque_mantimentos = {}
 mantimento_combinados_medidas = {}
 for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
     if arquivo_estoque_mantimento.endswith('.json'):
@@ -34,7 +34,7 @@ for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
                     else:
                         estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd']
                         estoque_detalhado = qtd_mantimento['Medida'].upper()
-estoque_mantimentos.update(estoque_mantimentos_combinados)
+# estoque_mantimentos.update(estoque_mantimentos_combinados)
 
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
 estoque_bebidas_combinados = defaultdict(int)
