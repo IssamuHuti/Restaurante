@@ -68,8 +68,8 @@ while True:
         for mantimento, qtd_mantimento in mantimentos_usadas.items():
             if mantimento in estoques_mantimentos:
                 retirada_estoque[mantimento]['Qtd'] += estoques_mantimentos[mantimento]['Qtd']
-                if retirada_estoque[mantimento]['Qtd'] <= estoques_mantimentos[mantimento]['Qtd']:
-                    retirada_estoque[mantimento]['Qtd'] -= mantimentos_usadas[mantimento]['Qtd']
+                if int(ingredientes[mantimento]['Medida']) <= estoques_mantimentos[mantimento]['Qtd']:
+                    retirada_estoque[mantimento]['Qtd'] -= int(ingredientes[mantimento]['Medida'])
                     estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
                 else: # não está entrando
                     pode_produzir = estoques_mantimentos[mantimento]['Qtd'] // (retirada_estoque[mantimento]['Qtd'] / qtd_prato)
