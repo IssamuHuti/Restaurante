@@ -68,12 +68,16 @@ while True:
         for mantimento, qtd_mantimento in mantimentos_usadas.items():
             if mantimento in estoques_mantimentos:
                 retirada_estoque[mantimento]['Qtd'] += estoques_mantimentos[mantimento]['Qtd']
-                if int(ingredientes[mantimento]['Medida']) <= estoques_mantimentos[mantimento]['Qtd']:
+                if mantimentos_usadas[mantimento]['Qtd'] <= estoques_mantimentos[mantimento]['Qtd']:
                     retirada_estoque[mantimento]['Qtd'] -= int(ingredientes[mantimento]['Medida'])
                     estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
-                else: # não está entrando
-                    pode_produzir = estoques_mantimentos[mantimento]['Qtd'] // (retirada_estoque[mantimento]['Qtd'] / qtd_prato)
+                else:
+                    pode_produzir = retirada_estoque[mantimento]['Qtd']
                     print(f'Mantimentos suficientes para produzir {pode_produzir} pratos')
+                    for prato, ingredientes in dados_cardapio.items(): # atualizar a quantia de ingredientes que será usada
+                        for ingrediente, quantidade in ingredientes.items():
+                            ingredientes_usadas = int(quantidade['Medida']) * pode_produzir
+                            mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas, 'Medida': quantidade['Unidade']}})
                     estoques_mantimentos[mantimento]['Qtd'] -= pode_produzir
             elif mantimento not in mantimentos_usadas[ingrediente]:
                 limpar()
