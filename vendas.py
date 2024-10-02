@@ -53,8 +53,6 @@ while True:
                 ingredientes_usadas = int(quantidade['Medida']) * int(qtd_prato)
                 print(f'- {ingrediente}: {ingredientes_usadas} {quantidade['Unidade']}')
                 mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas, 'Medida': quantidade['Unidade']}})
-            
-    lista_mantimentos_usadas = [nome for nome in mantimentos_usadas.keys()]
 
     caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
     retirada_estoque = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
@@ -74,17 +72,17 @@ while True:
                 else:
                     pode_produzir = retirada_estoque[mantimento]['Qtd']
                     print(f'Mantimentos suficientes para produzir {pode_produzir} pratos')
-                    for prato, ingredientes in dados_cardapio.items(): # atualizar a quantia de ingredientes que será usada
-                        for ingrediente, quantidade in ingredientes.items():
-                            ingredientes_usadas = int(quantidade['Medida']) * pode_produzir
-                            mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas, 'Medida': quantidade['Unidade']}})
+                    for prato, ingredientes2 in dados_cardapio.items(): # atualizar a quantia de ingredientes que será usada
+                        if venda_item == prato:
+                            for ingrediente, quantidade in ingredientes2.items():
+                                ingredientes_usadas2 = int(quantidade['Medida']) * pode_produzir
+                                mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas2, 'Medida': quantidade['Unidade']}})
+                    retirada_estoque[mantimento]['Qtd'] -= int(mantimentos_usadas[mantimento]['Qtd'])
                     estoques_mantimentos[mantimento]['Qtd'] -= pode_produzir
             elif mantimento not in mantimentos_usadas[ingrediente]:
                 limpar()
                 print('Ingrediente inexistente no estoque')
                 break
-
-    # atualizar a lista de estoque
 
     venda_duplicada(venda_item, int(qtd_prato))
 
@@ -96,6 +94,9 @@ while True:
     while mais_venda.upper() != 'S' and mais_venda.upper() != 'N':
         print('Digite somente "S" ou "N"')
         mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
+
+# atualização do estoque
+
 
 print(vendas_pratos)
 vendas_dia = {'data': data_formatada, 'Vendas_pratos': vendas_pratos}
