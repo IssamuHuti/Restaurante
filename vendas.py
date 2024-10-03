@@ -63,22 +63,27 @@ while True:
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_mantimentos = dados_estoque.get('Mantimentos', {})
+        pode_produzir = 0
         for mantimento, qtd_mantimento in mantimentos_usadas.items():
             if mantimento in estoques_mantimentos:
                 retirada_estoque[mantimento]['Qtd'] += estoques_mantimentos[mantimento]['Qtd']
-                if mantimentos_usadas[mantimento]['Qtd'] <= estoques_mantimentos[mantimento]['Qtd']:
-                    retirada_estoque[mantimento]['Qtd'] -= int(ingredientes[mantimento]['Medida'])
-                    estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
-                else:
-                    pode_produzir = retirada_estoque[mantimento]['Qtd']
+                if mantimentos_usadas[mantimento]['Qtd'] > estoques_mantimentos[mantimento]['Qtd']:
+                    pode_produzir += retirada_estoque[mantimento]['Qtd']
                     print(f'Mantimentos suficientes para produzir {pode_produzir} pratos')
-                    for prato, ingredientes2 in dados_cardapio.items(): # atualizar a quantia de ingredientes que será usada
+                    for prato, ingredientes2 in dados_cardapio.items():
                         if venda_item == prato:
                             for ingrediente, quantidade in ingredientes2.items():
                                 ingredientes_usadas2 = int(quantidade['Medida']) * pode_produzir
                                 mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas2, 'Medida': quantidade['Unidade']}})
                     retirada_estoque[mantimento]['Qtd'] -= int(mantimentos_usadas[mantimento]['Qtd'])
                     estoques_mantimentos[mantimento]['Qtd'] -= pode_produzir
+                elif mantimentos_usadas[mantimento]['Qtd'] <= estoques_mantimentos[mantimento]['Qtd']:
+                    if pode_produzir == 0:
+                        retirada_estoque[mantimento]['Qtd'] -= int(ingredientes[mantimento]['Medida'])
+                        estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
+                    else:
+                        retirada_estoque[mantimento]['Qtd'] -= int(mantimentos_usadas[mantimento]['Qtd'])
+                        estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
             elif mantimento not in mantimentos_usadas[ingrediente]:
                 limpar()
                 print('Ingrediente inexistente no estoque')
