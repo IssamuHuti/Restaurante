@@ -91,6 +91,7 @@ while True:
 
     venda_duplicada(venda_item, int(qtd_prato))
 
+    limpar()
     mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
     if mais_venda.upper() == 'S':
         continue
@@ -101,7 +102,16 @@ while True:
         mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
 
 # atualização do estoque
-
+novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': dados_estoque['Bebidas']}
+arquivo_estoque_dia = 'estoque_dia_{}.json'.format(str(data_formatada))
+caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque', arquivo_estoque_dia))
+with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_combinada:
+    json.dump(
+            novo_dados_estoque,
+            arquivo_estoque_combinada,
+            ensure_ascii=False,
+            indent=4
+        )
 
 print(vendas_pratos)
 vendas_dia = {'data': data_formatada, 'Vendas_pratos': vendas_pratos}
