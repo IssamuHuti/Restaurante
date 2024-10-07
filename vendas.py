@@ -79,10 +79,10 @@ while True:
                     estoques_mantimentos[mantimento]['Qtd'] -= pode_produzir
                 elif mantimentos_usadas[mantimento]['Qtd'] <= estoques_mantimentos[mantimento]['Qtd']:
                     if pode_produzir == 0:
-                        retirada_estoque[mantimento]['Qtd'] -= int(ingredientes[mantimento]['Medida'])
+                        retirada_estoque[mantimento]['Qtd'] -= int(mantimentos_usadas[mantimento]['Qtd'])
                         estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
                     else:
-                        retirada_estoque[mantimento]['Qtd'] -= int(mantimentos_usadas[mantimento]['Qtd'])
+                        retirada_estoque[mantimento]['Qtd'] -= int(mantimentos_usadas[mantimento]['Medida'])
                         estoques_mantimentos[mantimento]['Qtd'] = retirada_estoque[mantimento]['Qtd']
             elif mantimento not in mantimentos_usadas[ingrediente]:
                 limpar()
@@ -92,16 +92,15 @@ while True:
     venda_duplicada(venda_item, int(qtd_prato))
 
     limpar()
-    mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
+    mais_venda = input('Teve outro prato vendido? Sim (S) Não (N) ')
     if mais_venda.upper() == 'S':
         continue
     elif mais_venda.upper() == 'N':
         break
     while mais_venda.upper() != 'S' and mais_venda.upper() != 'N':
         print('Digite somente "S" ou "N"')
-        mais_venda = input('Teve outros itens vendidos? Sim (S) Não (N) ')
+        mais_venda = input('Teve outro prato vendido? Sim (S) Não (N) ')
 
-# atualização do estoque
 novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': dados_estoque['Bebidas']}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(str(data_formatada))
 caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque', arquivo_estoque_dia))
