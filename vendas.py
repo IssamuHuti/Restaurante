@@ -9,6 +9,12 @@ def limpar():
 def verificar_prato(venda_prato):
     return venda_prato in cardapio_vendas
 
+def verificar_bebida(venda_bebida):
+    with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+        dados_estoque = json.load(arquivo_estoque)
+        estoques_bebidas = dados_estoque.get('Bebidas', {})
+    return venda_bebida in estoques_bebidas
+
 def venda_duplicada(venda_prato, qtd_prato):
     if venda_prato in vendas_pratos:
         vendas_pratos[venda_prato] += qtd_prato
@@ -100,6 +106,17 @@ while True:
     while mais_venda.upper() != 'S' and mais_venda.upper() != 'N':
         print('Digite somente "S" ou "N"')
         mais_venda = input('Teve outro prato vendido? Sim (S) Não (N) ')
+while True:
+    while True:
+        venda_bebida = input('Escolha uma bebida: ')
+        if verificar_bebida(venda_bebida) or venda_bebida.upper() == 'Nada':
+            break
+        else:
+            print('Informe uma bebida que está no cardápio')
+            continue
+    qtd_bebida = input('Quantidade vendida: ')
+    break
+#  dar continuidade
 
 novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': dados_estoque['Bebidas']}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(str(data_formatada))
