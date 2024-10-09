@@ -30,9 +30,15 @@ print('VENDAS DO DIA')
 vendas_pratos = {}
 vendas_bebidas = {}
 
+caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
 caminho_cardapio = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio', 'cardapio.json')
 with open(caminho_cardapio, 'r', encoding='utf8') as arquivo:
     cardapio_vendas = json.load(arquivo)
+
+arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
+if arquivos_json:
+    arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
+caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
 
 while True:
     limpar()
@@ -43,11 +49,6 @@ while True:
         else:
             print('Informe um item que está no cardápio')
     qtd_prato = input('Quantidade vendida: ')
-
-    # verificar se possui estoque de mantimentos suficiente para produzir a quantidade de pratos pedidos
-    # 1 - criar um caminho para acessar os itens dentro do cardápio por prato
-    # 2 - criar um caminho para puxar os itens no estoque
-    # 3 - fazer a comparação entre o estoque e a quantidade de insumos utilizados
     
     with open(caminho_cardapio, 'r', encoding='utf8') as arquivo_cardapio:
         dados_cardapio = json.load(arquivo_cardapio)
@@ -60,12 +61,7 @@ while True:
                 print(f'- {ingrediente}: {ingredientes_usadas} {quantidade['Unidade']}')
                 mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas, 'Medida': quantidade['Unidade']}})
 
-    caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
     retirada_estoque = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
-    arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
-    if arquivos_json:
-        arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
-    caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
     with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_mantimentos = dados_estoque.get('Mantimentos', {})
@@ -106,6 +102,9 @@ while True:
     while mais_venda.upper() != 'S' and mais_venda.upper() != 'N':
         print('Digite somente "S" ou "N"')
         mais_venda = input('Teve outro prato vendido? Sim (S) Não (N) ')
+
+limpar()
+
 while True:
     while True:
         venda_bebida = input('Escolha uma bebida: ')
@@ -115,10 +114,31 @@ while True:
             print('Informe uma bebida que está no cardápio')
             continue
     qtd_bebida = input('Quantidade vendida: ')
-    break
-#  dar continuidade
 
-novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': dados_estoque['Bebidas']}
+#  dar continuidade
+    if venda_bebida.upper() == 'NADA':
+        break
+    else:
+        retirada_bebida = defaultdict(int)
+        with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+            dados_estoque = json.load(arquivo_estoque)
+            estoques_bebidas = dados_estoque.get('Bebidas', {})
+
+            retirada_bebida[venda_bebida] += estoques_bebidas[venda_bebida]
+            retirada_bebida[venda_bebida] -= int(qtd_bebida)
+            estoques_bebidas[venda_bebida] = retirada_bebida[venda_bebida] # o valor original das primeiras bebidas voltam ao valor inicial
+
+        limpar()
+        mais_bebida = input('Deseja outra bebida? Sim(S) ou Não(N) ')
+        if mais_bebida.upper() == 'S':
+            continue
+        elif mais_bebida.upper() == 'N':
+            break
+        while mais_bebida.upper() != 'S' and mais_bebida.upper() != 'N':
+            print('Digite somente "S" ou "N"')
+            mais_bebida = input('Deseja outra bebida? Sim(S) ou Não(N) ')
+
+novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': estoques_bebidas}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(str(data_formatada))
 caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque', arquivo_estoque_dia))
 with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_combinada:
