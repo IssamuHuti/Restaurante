@@ -105,6 +105,7 @@ while True:
 
 limpar()
 
+vezes_solicitadas = 0
 while True:
     while True:
         venda_bebida = input('Escolha uma bebida: ')
@@ -116,17 +117,23 @@ while True:
     qtd_bebida = input('Quantidade vendida: ')
 
 #  dar continuidade
+    bebidas_solicitadas = {venda_bebida: int(qtd_bebida)}
     if venda_bebida.upper() == 'NADA':
         break
     else:
         retirada_bebida = defaultdict(int)
-        with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
-            dados_estoque = json.load(arquivo_estoque)
-            estoques_bebidas = dados_estoque.get('Bebidas', {})
-
+        if vezes_solicitadas == 0:
+            with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+                dados_estoque = json.load(arquivo_estoque)
+                estoques_bebidas = dados_estoque.get('Bebidas', {})
+                retirada_bebida[venda_bebida] += estoques_bebidas[venda_bebida]
+                retirada_bebida[venda_bebida] -= bebidas_solicitadas[venda_bebida]
+                estoques_bebidas[venda_bebida] = retirada_bebida[venda_bebida]
+            vezes_solicitadas += 1
+        else:
             retirada_bebida[venda_bebida] += estoques_bebidas[venda_bebida]
-            retirada_bebida[venda_bebida] -= int(qtd_bebida)
-            estoques_bebidas[venda_bebida] = retirada_bebida[venda_bebida] # o valor original das primeiras bebidas voltam ao valor inicial
+            retirada_bebida[venda_bebida] -= bebidas_solicitadas[venda_bebida]
+            estoques_bebidas[venda_bebida] = retirada_bebida[venda_bebida]
 
         limpar()
         mais_bebida = input('Deseja outra bebida? Sim(S) ou Não(N) ')
