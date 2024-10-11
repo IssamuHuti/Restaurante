@@ -1,10 +1,7 @@
+from util import limpar, data_dia
 import os
 import json
-from datetime import datetime
 from collections import defaultdict
-
-def limpar():
-    os.system('cls')
 
 def verificar_prato(venda_prato):
     return venda_prato in cardapio_vendas
@@ -22,9 +19,8 @@ def venda_duplicada(venda_prato, qtd_prato):
         vendas_pratos[venda_prato] = qtd_prato
 
 limpar()
-data_compra = datetime.now()
-data_formatada = data_compra.strftime('%d_%m_%Y')
-print('Data da compra: ', data_formatada)
+data_compra = data_dia()
+print('Data da compra: ', data_compra)
 
 print('VENDAS DO DIA')
 vendas_pratos = {}
@@ -146,7 +142,7 @@ while True:
             mais_bebida = input('Deseja outra bebida? Sim(S) ou Não(N) ')
 
 novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': estoques_bebidas}
-arquivo_estoque_dia = 'estoque_dia_{}.json'.format(str(data_formatada))
+arquivo_estoque_dia = 'estoque_dia_{}.json'.format(data_compra)
 caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque', arquivo_estoque_dia))
 with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_combinada:
     json.dump(
@@ -157,12 +153,12 @@ with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_co
         )
 
 print(vendas_pratos)
-vendas_dia = {'data': data_formatada, 'Vendas_pratos': vendas_pratos}
+vendas_dia = {'data': data_compra, 'Vendas_pratos': vendas_pratos}
 
 pasta_salva = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'vendas_diarias')
 os.makedirs(pasta_salva, exist_ok=True)
 
-arquivo_venda_dia = os.path.join(pasta_salva, 'venda_{}.json'.format(str(data_formatada)))
+arquivo_venda_dia = os.path.join(pasta_salva, 'venda_{}.json'.format(data_compra))
 with open(arquivo_venda_dia, 'w', encoding='utf8') as arquivo_json:
     json.dump(
         vendas_dia,

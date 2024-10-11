@@ -1,8 +1,6 @@
+from util import limpar
 import os
 import json
-
-def limpar():
-    os.system('cls')
 
 def ingrediente_usado():
     insira_ingrediente = input('Insira ingrediente para o prato: ')

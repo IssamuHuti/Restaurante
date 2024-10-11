@@ -1,19 +1,12 @@
 import os
 import json
-from datetime import datetime
+from util import limpar, data_dia
 from collections import defaultdict
-
-def limpar():
-    os.system('cls')
-
-def data_lista():
-    data_compra = datetime.now()
-    data_formatada = data_compra.strftime('%m/%Y')
-    print('Gasto do mês:', data_formatada)
 
 limpar()
 print('GASTOS MENSAIS DO RESTAURANTE')
-data_lista()
+data_compra = data_dia()
+print('Data da compra: ', data_compra)
 
 print()
 
@@ -99,7 +92,8 @@ for arquivo_compra_bebida in os.listdir(pasta_compra_bebidas):
 
 total_bebidas = round(sum(compras_bebidas_combinados.values()), 2)
 
-data_lista()
+data_compra = data_dia()
+print('Data da compra: ', data_compra)
 print(f'O total dos gastos fixos foram: {total_gasto_fixo:.2f} reais.')
 print(f'O total dos gastos variávies foram: {total_gasto_variavel:.2f} reais.')
 print(f'O total dos gastos com bebidas foram: {total_bebidas:.2f} reais.')

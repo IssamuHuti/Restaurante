@@ -1,14 +1,11 @@
 import os
 import json
 from datetime import datetime
-
-def limpar():
-    os.system('cls')
+from util import limpar, data_dia
 
 limpar()
-data_compra = datetime.now()
-data_formatada = data_compra.strftime('%d_%m_%Y')
-print('Data da compra: ', data_formatada)
+data_compra = data_dia()
+print('Data da compra: ', data_compra)
 
 print('Informe os gastos com mantimentos do dia')
 
@@ -36,8 +33,8 @@ while True:
 
 total_gasto_produtos = round(sum(produtos.values()), 2)
 
-arquivo_matimentos = {'Data': data_formatada, 'Total de gasto': total_gasto_produtos, 'Produtos': produtos}
-estoque_mantimentos = {'Data': data_formatada, 'Estoque_mantimento': qtd_produtos}
+arquivo_matimentos = {'Data': data_compra, 'Total de gasto': total_gasto_produtos, 'Produtos': produtos}
+estoque_mantimentos = {'Data': data_compra, 'Estoque_mantimento': qtd_produtos}
 # acrescentar unidade de medida em estoque_mantimentos
 
 pasta_salva_gastos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'gastos')
@@ -45,8 +42,8 @@ pasta_salva_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), '
 os.makedirs(pasta_salva_gastos, exist_ok=True)
 os.makedirs(pasta_salva_estoque, exist_ok=True)
 
-compra_mantimentos_dia = os.path.join(pasta_salva_gastos, 'compra_mantimentos_{}.json'.format(str(data_formatada)))
-compra_mantimentos_estoque = os.path.join(pasta_salva_estoque, 'estoque_mantimentos_{}.json'.format(str(data_formatada)))
+compra_mantimentos_dia = os.path.join(pasta_salva_gastos, 'compra_mantimentos_{}.json'.format(data_compra))
+compra_mantimentos_estoque = os.path.join(pasta_salva_estoque, 'estoque_mantimentos_{}.json'.format(data_compra))
 
 limpar()
 with open(compra_mantimentos_dia, 'w', encoding='utf8') as arquivo:
