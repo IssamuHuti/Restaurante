@@ -1,4 +1,4 @@
-from util import limpar, data_dia
+from util import limpar, data_dia, caminho_cardapio_pasta
 import os
 import json
 from collections import defaultdict
@@ -7,7 +7,7 @@ def verificar_prato(venda_prato):
     return venda_prato in cardapio_vendas
 
 def verificar_bebida(venda_bebida):
-    with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+    with open(caminho_cardapio_pasta_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_bebidas = dados_estoque.get('Bebidas', {})
     return venda_bebida in estoques_bebidas
@@ -26,15 +26,14 @@ print('VENDAS DO DIA')
 vendas_pratos = {}
 vendas_bebidas = {}
 
-caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
 caminho_cardapio = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio', 'cardapio.json')
 with open(caminho_cardapio, 'r', encoding='utf8') as arquivo:
     cardapio_vendas = json.load(arquivo)
 
-arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
+arquivos_json = [arq for arq in os.listdir(caminho_cardapio_pasta) if arq.endswith('.json')]
 if arquivos_json:
-    arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
-caminho_estoque_arquivo = os.path.join(caminho_estoque, arquivo_mais_recente)
+    arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_cardapio_pasta, arq)))
+caminho_cardapio_pasta_arquivo = os.path.join(caminho_cardapio_pasta, arquivo_mais_recente)
 
 while True:
     limpar()
@@ -58,7 +57,7 @@ while True:
                 mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas, 'Medida': quantidade['Unidade']}})
 
     retirada_estoque = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
-    with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+    with open(caminho_cardapio_pasta_arquivo, 'r', encoding='utf8') as arquivo_estoque:
         dados_estoque = json.load(arquivo_estoque)
         estoques_mantimentos = dados_estoque.get('Mantimentos', {})
         pode_produzir = 0
@@ -119,7 +118,7 @@ while True:
     else:
         retirada_bebida = defaultdict(int)
         if vezes_solicitadas == 0:
-            with open(caminho_estoque_arquivo, 'r', encoding='utf8') as arquivo_estoque:
+            with open(caminho_cardapio_pasta_arquivo, 'r', encoding='utf8') as arquivo_estoque:
                 dados_estoque = json.load(arquivo_estoque)
                 estoques_bebidas = dados_estoque.get('Bebidas', {})
                 retirada_bebida[venda_bebida] += estoques_bebidas[venda_bebida]

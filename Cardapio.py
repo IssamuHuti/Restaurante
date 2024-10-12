@@ -1,4 +1,4 @@
-from util import limpar
+from util import limpar, caminho_cardapio_pasta
 import os
 import json
 
@@ -38,9 +38,7 @@ while True:
         else:
             break
 
-    caminho_cardapio_pasta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
     os.makedirs(caminho_cardapio_pasta, exist_ok=True)
-
     while True:
         if cadastrar_vizualizar_cardapio.upper() == 'C':
             card = os.path.join(caminho_cardapio_pasta, 'cardapio.json')
