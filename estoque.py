@@ -10,7 +10,6 @@ print('Data da compra: ', data_compra)
 pasta_estoque_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'estoque')
 estoque_mantimentos_combinados = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
 
-# estoque_mantimentos = {}
 mantimento_combinados_medidas = {}
 for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
     if arquivo_estoque_mantimento.endswith('.json'):
@@ -30,12 +29,10 @@ for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
                     else:
                         estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd']
                         estoque_detalhado = qtd_mantimento['Medida'].upper()
-# estoque_mantimentos.update(estoque_mantimentos_combinados)
 
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
 estoque_bebidas_combinados = defaultdict(int)
 
-# estoque_bebidas = {}
 for arquivo_estoque_bebida in os.listdir(pasta_estoque_bebidas):
     if arquivo_estoque_bebida.endswith('.json'):
         caminho_arquivo_bebidas = os.path.join(pasta_estoque_bebidas, arquivo_estoque_bebida)
@@ -44,7 +41,6 @@ for arquivo_estoque_bebida in os.listdir(pasta_estoque_bebidas):
             estoques_itens_bebidas = dados.get("Estoque_bebida", {})
             for item, qtd_bebida in estoques_itens_bebidas.items():
                 estoque_bebidas_combinados[item] += qtd_bebida
-# estoque_bebidas.update(estoque_bebidas_combinados)
 
 estoque_combinados = {"Mantimentos": dict(estoque_mantimentos_combinados),
                       "Bebidas": dict(estoque_bebidas_combinados)}

@@ -71,7 +71,8 @@ while True:
                         if venda_item == prato:
                             for ingrediente, quantidade in ingredientes2.items():
                                 ingredientes_usadas2 = int(quantidade['Medida']) * pode_produzir
-                                mantimentos_usadas.update({ingrediente: {'Qtd': ingredientes_usadas2, 'Medida': quantidade['Unidade']}})
+                                mantimentos_usadas.update({ingrediente: 
+                                                           {'Qtd': ingredientes_usadas2, 'Medida': quantidade['Unidade']}})
                     retirada_estoque[mantimento]['Qtd'] -= int(mantimentos_usadas[mantimento]['Qtd'])
                     estoques_mantimentos[mantimento]['Qtd'] -= pode_produzir
                 elif mantimentos_usadas[mantimento]['Qtd'] <= estoques_mantimentos[mantimento]['Qtd']:
@@ -111,7 +112,6 @@ while True:
             continue
     qtd_bebida = input('Quantidade vendida: ')
 
-#  dar continuidade
     bebidas_solicitadas = {venda_bebida: int(qtd_bebida)}
     if venda_bebida.upper() == 'NADA':
         break
@@ -142,7 +142,8 @@ while True:
 
 novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': estoques_bebidas}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(data_compra)
-caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque', arquivo_estoque_dia))
+caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
+                                                      'Estoque', arquivo_estoque_dia))
 with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_combinada:
     json.dump(
             novo_dados_estoque,

@@ -12,11 +12,41 @@ print('Informe os gastos com mantimentos do dia')
 produtos = {}
 qtd_produtos = {}
 
-produto = input('Produto: ')
-preco = input('R$ ')
+while True:
+    produto = input('Produto: ')
+    if produto.strip():
+        break
+    else:
+        print('Informe um produto')
+while True:
+    preco = input('R$ ')
+    try:
+        numero = int(preco)
+        break
+    except ValueError:
+        try:
+            numero = float(preco)
+            break
+        except ValueError:
+            print('Entrada inválida, digite somente números')
 produtos.update({produto: float(preco)})
-qtd_produto = input('Quantidade: ')
-und_medida = input('Medida: ') # adicionar unidade de medida dentro da biblioteca
+while True:
+    qtd_produto = input('Quantidade: ')
+    try:
+        numero = int(qtd_produto)
+        break
+    except ValueError:
+        try:
+            numero = float(qtd_produto)
+            break
+        except ValueError:
+            print('Entrada inválida, digite somente números')
+while True:
+    und_medida = input('Medida: ')
+    if und_medida.strip():
+            break
+    else:
+        print('Informe o produto')
 produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida}
 qtd_produtos.update({produto: produto_med})
 while True:
@@ -27,7 +57,7 @@ while True:
     preco = input('R$ ')
     produtos.update({produto: float(preco)})
     qtd_produto = input('Quantidade: ')
-    und_medida = input('Medida: ') # adicionar unidade de medida dentro da biblioteca
+    und_medida = input('Medida: ')
     produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida.upper()}
     qtd_produtos.update({produto: produto_med})
 
