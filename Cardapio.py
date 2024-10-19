@@ -3,11 +3,32 @@ import os
 import json
 
 def ingrediente_usado():
-    insira_ingrediente = input('Insira ingrediente para o prato: ')
+    while True:
+        insira_ingrediente = input('Insira ingrediente para o prato: ')
+        if insira_ingrediente.strip():
+            break
+        else:
+            print('Informe um ingrediente')
     if insira_ingrediente.lower() == 'pare':
         return None, None
-    medida = input('Medida do ingrediente: ')
-    unidade = input('Unidade de medida: ')
+    while True:
+        medida = input('Medida do ingrediente: ')
+        try:
+            numero = int(medida)
+            break
+        except ValueError:
+            try:
+                numero = int(medida)
+                break
+            except ValueError:
+                print('Entrada inválida, digite somente números')
+
+    while True:
+        unidade = input('Unidade de medida: ')
+        if unidade.strip():
+            break
+        else:
+            print('Informe uma medida')
     medida_ingrediente = {'Medida': medida, 'Unidade': unidade}
     return insira_ingrediente, medida_ingrediente
 
