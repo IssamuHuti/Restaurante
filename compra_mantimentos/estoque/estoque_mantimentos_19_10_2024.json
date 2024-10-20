@@ -1,0 +1,17 @@
+{
+  "Data": "19_10_2024",
+  "Estoque_mantimento": {
+    "arroz": {
+      "Qtd": 20,
+      "Medida": "kg"
+    },
+    "limão": {
+      "Qtd": 30,
+      "Medida": "un"
+    },
+    "azeite": {
+      "Qtd": 900,
+      "Medida": "ml"
+    }
+  }
+}

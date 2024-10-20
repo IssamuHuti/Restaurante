@@ -1,6 +1,5 @@
 import os
 import json
-from datetime import datetime
 from util import limpar, data_dia
 
 limpar()
@@ -18,37 +17,45 @@ while True:
         break
     else:
         print('Informe um produto')
-while True:
-    preco = input('R$ ')
-    try:
-        numero = int(preco)
-        break
-    except ValueError:
+while produto != 'pare':
+    while True:
+        preco = input('R$ ')
         try:
-            numero = float(preco)
+            numero = int(preco)
             break
         except ValueError:
-            print('Entrada inválida, digite somente números')
-produtos.update({produto: float(preco)})
-while True:
-    qtd_produto = input('Quantidade: ')
-    try:
-        numero = int(qtd_produto)
-        break
-    except ValueError:
+            try:
+                numero = float(preco)
+                break
+            except ValueError:
+                print('Entrada inválida, digite somente números')
+    produtos.update({produto: float(preco)})
+    while True:
+        qtd_produto = input('Quantidade: ')
         try:
-            numero = float(qtd_produto)
+            numero = int(qtd_produto)
             break
         except ValueError:
-            print('Entrada inválida, digite somente números')
-while True:
-    und_medida = input('Medida: ')
-    if und_medida.strip():
+            try:
+                numero = float(qtd_produto)
+                break
+            except ValueError:
+                print('Entrada inválida, digite somente números')
+    while True:
+        und_medida = input('Medida: ')
+        if und_medida.strip():
+                break
+        else:
+            print('Informe o produto')
+    produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida}
+    qtd_produtos.update({produto: produto_med})
+    limpar()
+    while True:
+        produto = input('Produto: ')
+        if produto.strip():
             break
-    else:
-        print('Informe o produto')
-produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida}
-qtd_produtos.update({produto: produto_med})
+        else:
+            print('Informe um produto')
 
 total_gasto_produtos = round(sum(produtos.values()), 2)
 

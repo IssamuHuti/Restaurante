@@ -18,30 +18,38 @@ while True:
         break
     else:
         print('Informe uma bebida')
-while True:
-    preco_bebida = input('R$ ')
-    try:
-        numero = int(preco_bebida)
-        break
-    except ValueError:
+while bebida.lower() != 'pare':
+    while True:
+        preco_bebida = input('R$ ')
         try:
-            numero = float(preco_bebida)
+            numero = int(preco_bebida)
             break
         except ValueError:
-            print('Entrada inválida, digite somente números')
-bebidas.update({bebida: float(preco_bebida)})
-while True:
-    qtd_bebida = input('Quantidade: ')
-    try:
-        numero = int(qtd_bebida)
-        break
-    except ValueError:
+            try:
+                numero = float(preco_bebida)
+                break
+            except ValueError:
+                print('Entrada inválida, digite somente números')
+    bebidas.update({bebida: float(preco_bebida)})
+    while True:
+        qtd_bebida = input('Quantidade: ')
         try:
-            numero = float(qtd_bebida)
+            numero = int(qtd_bebida)
             break
         except ValueError:
-            print('Entrada inválida, digite somente números')
-qtd_bebidas.update({bebida: int(qtd_bebida)})
+            try:
+                numero = float(qtd_bebida)
+                break
+            except ValueError:
+                print('Entrada inválida, digite somente números')
+    qtd_bebidas.update({bebida: int(qtd_bebida)})
+    limpar()
+    while True:
+        bebida = input('Produto: ')
+        if bebida.strip():
+            break
+        else:
+            print('Informe uma bebida')
 
 total_gasto_bebidas = round(sum(bebidas.values()), 2)
 
