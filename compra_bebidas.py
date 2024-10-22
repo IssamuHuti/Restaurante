@@ -1,7 +1,6 @@
 import os
 from util import limpar, data_dia
 import json
-from datetime import datetime
 
 limpar()
 data_compra = data_dia()

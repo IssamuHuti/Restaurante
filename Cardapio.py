@@ -1,4 +1,4 @@
-from util import limpar, caminho_cardapio_pasta
+from util import limpar, caminho_cardapio_pasta, caminho_estoque
 import os
 import json
 
@@ -162,7 +162,6 @@ while True:
 
 limpar()
 print('Bebidas')
-caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
 arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
 if arquivos_json:
     arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))

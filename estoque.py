@@ -1,5 +1,5 @@
 import os
-from util import limpar, data_dia
+from util import limpar, data_dia, caminho_estoque
 import json
 from collections import defaultdict
 
@@ -45,7 +45,7 @@ for arquivo_estoque_bebida in os.listdir(pasta_estoque_bebidas):
 estoque_combinados = {"Mantimentos": dict(estoque_mantimentos_combinados),
                       "Bebidas": dict(estoque_bebidas_combinados)}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(data_compra)
-caminho_arquivo_combinado = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque', arquivo_estoque_dia))
+caminho_arquivo_combinado = os.path.join(caminho_estoque, arquivo_estoque_dia)
 with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_combinada:
     json.dump(
             estoque_combinados,
@@ -54,7 +54,7 @@ with open(caminho_arquivo_combinado, 'w', encoding='utf8') as arquivo_estoque_co
             indent=4
         )
 
-pasta_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque')
+pasta_estoque = caminho_estoque
 os.makedirs(pasta_estoque, exist_ok=True)
 
 

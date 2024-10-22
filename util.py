@@ -10,3 +10,4 @@ def data_dia():
     return data_formatada
 
 caminho_cardapio_pasta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
+caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estoque')
