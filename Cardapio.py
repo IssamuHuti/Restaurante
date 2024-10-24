@@ -120,15 +120,17 @@ while True:
             limpar()
             with open(caminho_cardapio_arquivo, 'r', encoding='utf8') as arquivo_cardapio:
                 dados_cardapio = json.load(arquivo_cardapio)
+                print('PRATOS')
                 for pr, ings in dados_cardapio.items():            
-                    print(pr)
-                    for ing, md in ings.items():
-                        print(f'- {ing}:', end=' ')
-                        mds = list(md.values())
-                        for i in range(0, len(mds), 2):
-                            print(f'{mds[0]} {mds[1]}')
-                    print()
+                    print('-', pr)
+                    # for ing, md in ings.items():
+                    #     print(f'- {ing}:', end=' ')
+                    #     mds = list(md.values())
+                    #     for i in range(0, len(mds), 2):
+                    #         print(f'{mds[0]} {mds[1]}')
+                    # print()
             
+            print()
             retirada_prato = input('Deseja retirar algum prato do cardápio? Sim(S) Não(N) ')
             while retirada_prato.upper() != 'S' and retirada_prato.upper() != 'N':
                 print('Digite "S" ou "N"')
@@ -161,7 +163,14 @@ while True:
         continue
 
 limpar()
-print('Bebidas')
+with open(caminho_cardapio_arquivo, 'r', encoding='utf8') as arquivo_cardapio:
+    dados_cardapio = json.load(arquivo_cardapio)
+    print('PRATOS')
+    for pr, ings in dados_cardapio.items():            
+        print('-', pr)
+
+print()
+print('BEBIDAS')
 arquivos_json = [arq for arq in os.listdir(caminho_estoque) if arq.endswith('.json')]
 if arquivos_json:
     arquivo_mais_recente = max(arquivos_json, key=lambda arq: os.path.getatime(os.path.join(caminho_estoque, arq)))
