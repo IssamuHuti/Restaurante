@@ -10,7 +10,6 @@ print('Data da compra: ', data_compra)
 pasta_estoque_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos', 'estoque')
 estoque_mantimentos_combinados = defaultdict(lambda: {'Qtd': 0, 'Medida': ''})
 
-mantimento_combinados_medidas = {}
 for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
     if arquivo_estoque_mantimento.endswith('.json'):
         caminho_arquivo_mantimento = os.path.join(pasta_estoque_mantimentos, arquivo_estoque_mantimento)

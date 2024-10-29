@@ -1,0 +1,47 @@
+{
+    "Mantimentos": {
+        "arroz": {
+            "Qtd": 30000,
+            "Medida": ""
+        },
+        "molho tomate": {
+            "Qtd": 5,
+            "Medida": ""
+        },
+        "oleo": {
+            "Qtd": 5000,
+            "Medida": ""
+        },
+        "sal": {
+            "Qtd": 2000,
+            "Medida": ""
+        },
+        "pimenta": {
+            "Qtd": 150,
+            "Medida": ""
+        },
+        "ovo": {
+            "Qtd": 24,
+            "Medida": ""
+        },
+        "limão": {
+            "Qtd": 30,
+            "Medida": ""
+        },
+        "azeite": {
+            "Qtd": 900,
+            "Medida": ""
+        },
+        "shoyu": {
+            "Qtd": 900,
+            "Medida": ""
+        }
+    },
+    "Bebidas": {
+        "tonica": 36,
+        "soda": 18,
+        "coca": 80,
+        "coca zero": 50,
+        "skol": 24
+    }
+}
