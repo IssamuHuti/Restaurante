@@ -71,3 +71,4 @@ for elemento, quantidade in estoque_combinados.items():
             print(f'- {qtd}: {medida}')
         print()
 
+# incluir unidade de medida para os mantimentos
