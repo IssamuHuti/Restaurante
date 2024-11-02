@@ -22,12 +22,18 @@ for arquivo_estoque_mantimento in os.listdir(pasta_estoque_mantimentos):
                     if qtd_mantimento['Medida'].upper() == 'L':
                         estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd'] * 1000
                         estoque_detalhado = 'ML'
+                        estoque_mantimentos_combinados[item]['Medida'] = estoque_detalhado
                     elif qtd_mantimento['Medida'].upper() == 'KG':
                         estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd'] * 1000
                         estoque_detalhado = 'G'
+                        estoque_mantimentos_combinados[item]['Medida'] = estoque_detalhado
                     else:
                         estoque_mantimentos_combinados[item]['Qtd'] += qtd_mantimento['Qtd']
                         estoque_detalhado = qtd_mantimento['Medida'].upper()
+                        if estoque_detalhado == 'UNID':
+                            estoque_mantimentos_combinados[item]['Medida'] = 'UN'
+                        else:
+                            estoque_mantimentos_combinados[item]['Medida'] = estoque_detalhado
 
 pasta_estoque_bebidas = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_bebidas', 'estoque')
 estoque_bebidas_combinados = defaultdict(int)
@@ -70,5 +76,3 @@ for elemento, quantidade in estoque_combinados.items():
         for qtd, medida in quantidade.items():
             print(f'- {qtd}: {medida}')
         print()
-
-# incluir unidade de medida para os mantimentos
