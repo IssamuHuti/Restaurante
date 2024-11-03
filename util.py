@@ -12,3 +12,4 @@ def data_dia():
 caminho_cardapio_pasta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cardapio')
 caminho_estoque = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Estoque')
 caminho_compra_mantimentos = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'compra_mantimentos')
+caminho_gastos_mensais = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'gastos_mensais')
