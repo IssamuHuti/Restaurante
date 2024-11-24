@@ -59,12 +59,40 @@ for arquivos_cardapio in os.listdir(caminho_cardapio_pasta):
                 else:
                     custo_prato.update({prato: round(custo_por_prato, 2)})
 
-print(custo_prato)
+print('Custo por prato')
+for prato, custo in custo_prato.items():
+    if type(custo) == int or type(custo) == float:
+        print(prato + ': ' + str(round(custo, 3)))
+    else:
+        print(prato + ': ' + custo)
 
+print()
 for arquivo_despesas_gerais in os.listdir(caminho_gastos_mensais):
     if arquivo_despesas_gerais.endswith('.json'):
         caminho_gasto_mes = os.path.join(caminho_gastos_mensais, arquivo_despesas_gerais)
         with open(caminho_gasto_mes, 'r', encoding='utf8') as arquivo_gasto_mensal:
             dados_gastos_mensais = json.load(arquivo_gasto_mensal)
-            gastos_mensais = dados.get("Gastos por categoria", {})
-            print(gastos_mensais)
+            gastos_mensais = dados_gastos_mensais.get("Total_de_gasto", {})
+            total_despesas = 0
+            for tipo_gasto, valor_gasto in gastos_mensais.items():
+                total_despesas += valor_gasto
+            # print(round(total_despesas, 2))
+
+proporcao_despesas_gerais = len(custo_prato)
+for i in custo_prato.values():
+    if i == 'Não disponivel':
+        proporcao_despesas_gerais -= 1
+
+distribuicao_prato = total_despesas / proporcao_despesas_gerais
+
+print(distribuicao_prato)
+
+print()
+print('Estimativa de venda de prato por mês')
+estimativa_venda = {}
+for prato, _ in custo_prato.items():
+    estimativa_produto = input(f'Estimativa de venda {prato}: ')
+    estimativa_venda.update({prato: int(estimativa_produto)})
+
+# for prato, estimativa in estimativa_venda.items():
+#     print(f'{prato}: {estimativa}') 
