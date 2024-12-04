@@ -1,6 +1,6 @@
 import os
 import json
-from util import limpar, data_dia
+from util import limpar, data_dia, permissao_str, permissao_int
 from collections import defaultdict
 
 limpar()
@@ -14,35 +14,35 @@ total_gastos = {}
 gastos_categoria = {}
 gastos_variaveis = {}
 gastos_fixos = {}
-tipo_gasto = input('Informe se o gasto é Fixo (F) ou Variável (V): ')
+tipo_gasto = permissao_str('Informe se o gasto é Fixo (F) ou Variável (V): ')
 
 while True:
     while tipo_gasto.upper() != 'F' and tipo_gasto.upper() != 'V':
         limpar()
         print('Digite somente (F) ou (V)')
-        tipo_gasto = input('Informe se o gasto é Fixo (F) ou Variável (V): ')
+        tipo_gasto = permissao_str('Informe se o gasto é Fixo (F) ou Variável (V): ')
 
     limpar()
 
     if tipo_gasto.upper() == 'F':
-        gasto_fixo = input('Gasto fixo: ')
-        valor_gasto_fixo = input('R$ ')
+        gasto_fixo = permissao_str('Gasto fixo: ')
+        valor_gasto_fixo = permissao_int('R$ ')
         gastos_fixos.update({gasto_fixo: float(valor_gasto_fixo)})
         limpar()
     elif tipo_gasto.upper() == 'V':
-        gasto_variavel = input('Gasto variavel: ')
-        valor_gasto_variavel = input('R$ ')
+        gasto_variavel = permissao_str('Gasto variavel: ')
+        valor_gasto_variavel = permissao_int('R$ ')
         gastos_variaveis.update({gasto_variavel: float(valor_gasto_variavel)})
         limpar()
     
-    incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N) ')
+    incluir = permissao_str('Deseja incluir mais gastos? Sim (S) ou Não (N) ')
     while incluir.upper() != 'S' and incluir.upper() != 'N':
         limpar()
         print('Digite somente (S) ou (N)')
-        incluir = input('Deseja incluir mais gastos? Sim (S) ou Não (N)  ')
+        incluir = permissao_str('Deseja incluir mais gastos? Sim (S) ou Não (N)  ')
     if incluir.upper() == 'S':
         limpar()
-        tipo_gasto = input('Informe se o gasto é Fixo (F) ou Variável (V): ')
+        tipo_gasto = permissao_str('Informe se o gasto é Fixo (F) ou Variável (V): ')
     else:
         break
 

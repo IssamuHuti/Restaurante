@@ -1,6 +1,6 @@
 import os
 import json
-from util import limpar, caminho_estoque, caminho_cardapio_pasta, caminho_compra_mantimentos, caminho_gastos_mensais
+from util import limpar, caminho_estoque, caminho_cardapio_pasta, caminho_compra_mantimentos, caminho_gastos_mensais, permissao_int
 from collections import defaultdict
 
 limpar()
@@ -91,7 +91,7 @@ print()
 print('Estimativa de venda de prato por mês')
 estimativa_venda = {}
 for prato, _ in custo_prato.items():
-    estimativa_produto = input(f'Estimativa de venda {prato}: ')
+    estimativa_produto = (f'Estimativa de venda {prato}: ')
     estimativa_venda.update({prato: int(estimativa_produto)})
 
 print()
@@ -106,7 +106,7 @@ for prato, custo_prato_total in custo_total_prato.items():
     print(f'{prato}: {round(custo_prato_total, 2)}')
 
 
-alavancagem = float(input('Por quantas vezes a mais do custo praneja vender? '))
+alavancagem = float(permissao_int('Por quantas vezes a mais do custo praneja vender? '))
 preco_venda = {}
 for prato, custo_prato_total in custo_total_prato.items():
     preco_alavancado = custo_prato_total * alavancagem

@@ -1,4 +1,4 @@
-from util import limpar, data_dia, caminho_cardapio_pasta
+from util import limpar, data_dia, caminho_cardapio_pasta, permissao_int, permissao_str
 import os
 import json
 from collections import defaultdict
@@ -38,12 +38,12 @@ caminho_cardapio_pasta_arquivo = os.path.join(caminho_cardapio_pasta, arquivo_ma
 while True:
     limpar()
     while True:
-        venda_item = input('Prato: ')
+        venda_item = permissao_str('Prato: ')
         if verificar_prato(venda_item):
             break
         else:
             print('Informe um item que está no cardápio')
-    qtd_prato = input('Quantidade vendida: ')
+    qtd_prato = permissao_int('Quantidade vendida: ')
     
     with open(caminho_cardapio, 'r', encoding='utf8') as arquivo_cardapio:
         dados_cardapio = json.load(arquivo_cardapio)
@@ -90,27 +90,27 @@ while True:
     venda_duplicada(venda_item, int(qtd_prato))
 
     limpar()
-    mais_venda = input('Teve outro prato vendido? Sim (S) Não (N) ')
+    mais_venda = permissao_str('Teve outro prato vendido? Sim (S) Não (N) ')
     if mais_venda.upper() == 'S':
         continue
     elif mais_venda.upper() == 'N':
         break
     while mais_venda.upper() != 'S' and mais_venda.upper() != 'N':
         print('Digite somente "S" ou "N"')
-        mais_venda = input('Teve outro prato vendido? Sim (S) Não (N) ')
+        mais_venda = permissao_str('Teve outro prato vendido? Sim (S) Não (N) ')
 
 limpar()
 
 vezes_solicitadas = 0
 while True:
     while True:
-        venda_bebida = input('Escolha uma bebida: ')
+        venda_bebida = permissao_str('Escolha uma bebida: ')
         if verificar_bebida(venda_bebida) or venda_bebida.upper() == 'Nada':
             break
         else:
             print('Informe uma bebida que está no cardápio')
             continue
-    qtd_bebida = input('Quantidade vendida: ')
+    qtd_bebida = permissao_str('Quantidade vendida: ')
 
     bebidas_solicitadas = {venda_bebida: int(qtd_bebida)}
     if venda_bebida.upper() == 'NADA':
@@ -131,14 +131,14 @@ while True:
             estoques_bebidas[venda_bebida] = retirada_bebida[venda_bebida]
 
         limpar()
-        mais_bebida = input('Deseja outra bebida? Sim(S) ou Não(N) ')
+        mais_bebida = permissao_str('Deseja outra bebida? Sim(S) ou Não(N) ')
         if mais_bebida.upper() == 'S':
             continue
         elif mais_bebida.upper() == 'N':
             break
         while mais_bebida.upper() != 'S' and mais_bebida.upper() != 'N':
             print('Digite somente "S" ou "N"')
-            mais_bebida = input('Deseja outra bebida? Sim(S) ou Não(N) ')
+            mais_bebida = permissao_str('Deseja outra bebida? Sim(S) ou Não(N) ')
 
 novo_dados_estoque = {'Mantimentos': estoques_mantimentos, 'Bebidas': estoques_bebidas}
 arquivo_estoque_dia = 'estoque_dia_{}.json'.format(data_compra)

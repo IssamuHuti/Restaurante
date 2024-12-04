@@ -1,6 +1,6 @@
 import os
 import json
-from util import limpar, data_dia
+from util import limpar, data_dia, permissao_int, permissao_str
 
 limpar()
 data_compra = data_dia()
@@ -12,46 +12,21 @@ produtos = {}
 qtd_produtos = {}
 
 while True:
-    produto = input('Produto: ')
+    produto = permissao_str('Produto: ')
     if produto.strip():
         break
     else:
         print('Informe um produto')
 while produto != 'pare':
-    while True:
-        preco = input('R$ ')
-        try:
-            numero = int(preco)
-            break
-        except ValueError:
-            try:
-                numero = float(preco)
-                break
-            except ValueError:
-                print('Entrada inválida, digite somente números')
+    preco = permissao_int('R$ ')
     produtos.update({produto: float(preco)})
-    while True:
-        qtd_produto = input('Quantidade: ')
-        try:
-            numero = int(qtd_produto)
-            break
-        except ValueError:
-            try:
-                numero = float(qtd_produto)
-                break
-            except ValueError:
-                print('Entrada inválida, digite somente números')
-    while True:
-        und_medida = input('Medida: ')
-        if und_medida.strip():
-                break
-        else:
-            print('Informe o produto')
+    qtd_produto = permissao_int('Quantidade: ')
+    und_medida = permissao_str('Medida: ')
     produto_med = {'Qtd': int(qtd_produto), 'Medida': und_medida}
     qtd_produtos.update({produto: produto_med})
     limpar()
     while True:
-        produto = input('Produto: ')
+        produto = permissao_str('Produto: ')
         if produto.strip():
             break
         else:
